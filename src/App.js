@@ -1,16 +1,25 @@
 import React from 'react';
 import './App.css';
-import firebase from "firebase";
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Home from './components/Home';
+import Login from './components/Login';
+
 
 function App() {
-  const firebaseApp = firebase.apps[0];
+
   return (
     <div>
       <h1>React & Firebase</h1>
-      <h2>Test initialization of firebase: succesfull</h2>
-      <code>
-        <pre>{JSON.stringify(firebaseApp.options, null, 2)}</pre>
-      </code>
+      <Router>
+      <Link to={"/login"}>Login</Link>
+      <main>
+        <Switch>
+                <Route path="/" component={Home} exact />
+                <Route path="/login" component={Login} />
+        </Switch>   
+      </main>
+      </Router>
+  
     </div>
   );
 }
