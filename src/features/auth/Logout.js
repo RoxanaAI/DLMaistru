@@ -1,7 +1,6 @@
 import React from 'react';
 import { auth } from 'firebase';
 
-
 export default function Logout(){
 
     function onLogout() {
@@ -13,7 +12,6 @@ export default function Logout(){
             alert(error.message)
           });
     }
-
    
     return(
         <>
@@ -23,3 +21,5 @@ export default function Logout(){
         </>
     )
 }
+
+export {Logout}

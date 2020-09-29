@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import Home from './components/Home';
-import Login from './components/Login';
-import Logout from './components/Logout';
+import { Home } from './features/auth/Home';
+import { Login } from './features/auth/Login';
+import { Logout } from './features/auth/Logout';
 
 
 function App() {
