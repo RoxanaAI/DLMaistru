@@ -1,6 +1,6 @@
 import { auth } from 'firebase';
 import React from 'react';
-import  useForm  from '../../hooks/CustomForm';
+import  useForm  from '../../hooks/useForm';
 
 export default function Login(){
   
