@@ -4,7 +4,7 @@ import {useForm, useApi} from '../../hooks';
 
 export default function WorkerDetails() {
     const { workerId } = useParams();
-    const [ worker, _, mutate] = useApi(`games/${workerId}`);
+    const [ worker, _, mutate] = useApi(`games/5f7213458b6b6e002498a8ae`); //useApi(`games/${workerId}`);
 
     const {values, bindInput} = useForm(worker);
 
