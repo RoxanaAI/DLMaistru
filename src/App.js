@@ -8,6 +8,7 @@ import { Logout } from './features/auth/Logout';
 
 import { Navbar } from './components/Navbar';
 import { WorkerDetails } from './features/workers/WorkerDetails';
+import { WorkersList } from './features/workers/WorkersList';
 
 function App() {
 
@@ -17,9 +18,12 @@ function App() {
       <Navbar />
       <main>
         <Switch>
-                <Route path="/" component={Home} exact />
-                <Route path="/login" component={Login} />
-                <Route path="/logout" component={Logout} />
+            <Route path="/" component={Home} exact />
+            <Route path="/login" component={Login} />
+            <Route path="/logout" component={Logout} />
+            <Route exact path="/worker" component={WorkersList} />
+            <Route exact path="/worker/:workerId" component={WorkerDetails} />
+            <Route component={() => <h1>404</h1>} />
         </Switch>
         <WorkerDetails />
       </main>

@@ -18,3 +18,5 @@ export default function WorkersList() {
         </>
     );
 }
+
+export {WorkersList};
