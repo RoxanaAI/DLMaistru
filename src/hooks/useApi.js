@@ -4,7 +4,7 @@ const baseUrl = 'https://games-app-siit.herokuapp.com';
 
 export default function useApi(endpoint, options) {
     const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+  //  const [error, setError] = useState(null);
     const [fetchOptions, setFetchOptions] = useState(options);
     const [shouldReload, setShouldReload] = useState(1);
 
@@ -27,21 +27,22 @@ export default function useApi(endpoint, options) {
         async function getData() {
             try {
                 const res = await fetch(`${baseUrl}/${endpoint}`, fetchOptions);
-                
+                 
                 if(!res.ok) {
-                    throw new Error(`${res.status}/${res.statusText}`);
+                 //  throw new Error(`${res.status}/${res.statusText}`);
+               console.log(res.statusText);
                 }
 
                 const data = await res.json();
-                setError(null);
+               // setError(null);
                 setData(data);
             } catch(e) {
-                setError(`There was an error with the API: "${e.message}" the endpoint was: "${endpoint}".`);
+              //  setError(`There was an error with the API: "${e.message}" the endpoint was: "${endpoint}".`);
             }
         }
 
         getData();
     }, [endpoint, fetchOptions, shouldReload]);
 
-    return [data, error, triggerReload, mutate];
+    return [data,  triggerReload, mutate];
 }

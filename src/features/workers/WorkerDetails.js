@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import {useForm, useApi} from '../../hooks';
 
 export default function WorkerDetails() {
-    const { workerId } = useParams();
-    const [ worker, _, mutate] =  useApi(`games/5f7213458b6b6e002498a8ae`); //useApi(`games/${workerId}`);
+    const { id } = useParams();
+    const [ worker,  _, mutate] =  useApi(`games/${id}`); //useApi(`games/${workerId}`);
 
     const {values, bindInput} = useForm(worker);
 
@@ -14,7 +14,7 @@ export default function WorkerDetails() {
         mutate(rest);
     }
    
-    console.log(JSON.stringify(worker));
+  // console.log(JSON.stringify(worker._id));
     if(!worker) {
         return <h1>Loading ...</h1>;
     }
@@ -47,4 +47,3 @@ export default function WorkerDetails() {
     )
 }
 
-export {WorkerDetails}

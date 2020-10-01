@@ -19,4 +19,4 @@ export default function WorkersList() {
     );
 }
 
-export {WorkersList};
+//export {WorkersList};
