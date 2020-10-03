@@ -18,17 +18,17 @@ main{
   align-items: center;
   justify-content: center;
   height: 400px;
- }
+}
 
- .logo{
-   width: 50px;
-   border-radius: 50%;
-   padding-right: 5px;
- }
+.logo{
+  width: 50px;
+  border-radius: 50%;
+  padding-right: 5px;
+}
 
- .navbar{
+.navbar{
   margin-top: 5px;
   background-color: #efefef;
   border: 1px solid gray;
- }
+}
 
