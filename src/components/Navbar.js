@@ -36,7 +36,7 @@ export default function Navbar() {
                        </>
                     )}
             <li className="nav-item">
-              <Link to={"/logout"} className="nav-link">Logout</Link>
+              <Link to={"/logout"} className="nav-link" >Logout</Link>
             </li>
           </ul>
         </div>
