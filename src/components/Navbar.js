@@ -1,8 +1,10 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../features/auth/AuthContext';
 
 
 export default function Navbar() {
+  const { isAuthenticated, user } = useContext(AuthContext);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,12 +20,21 @@ export default function Navbar() {
             </li>
             </ul>
             <ul className="navbar-nav navbar-right">
+            {!isAuthenticated ? (
+                        <>
             <li className="nav-item ">
               <Link to={"/login"} className="nav-link">Login</Link>
             </li>
             <li className="nav-item">
               <Link to={"/register"} className="nav-link">Register</Link>
             </li>
+            </>): (
+                        <>
+                            <li className="nav-item" className='welcome'>
+                                Welcome, {user.email}
+                            </li>
+                       </>
+                    )}
             <li className="nav-item">
               <Link to={"/logout"} className="nav-link">Logout</Link>
             </li>

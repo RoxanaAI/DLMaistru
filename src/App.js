@@ -9,11 +9,13 @@ import  Logout  from './features/auth/Logout';
 import  Navbar  from './components/Navbar';
 import  WorkerDetails  from './features/workers/WorkerDetails';
 import  WorkersList  from './features/workers/WorkersList';
+import { AuthContextProvider } from './features/auth/AuthContext';
 
 function App() {
 
   return (
     <div>
+      <AuthContextProvider>
       <Router>
       <Navbar />
       <main>
@@ -27,7 +29,7 @@ function App() {
         </Switch>
       </main>
       </Router>
-  
+    </AuthContextProvider>
     </div>
   );
 }

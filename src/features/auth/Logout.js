@@ -1,17 +1,24 @@
-import React from 'react';
+import React,{ useContext }  from 'react';
 import { auth } from 'firebase';
+import { Redirect } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 export default function Logout(){
 
+  const { isAuthenticated } = useContext(AuthContext);
+
     function onLogout() {
        auth().signOut().then(function() {
-            // Sign-out successful.
-            alert('Log out succesfully')
+          
           }).catch(function(error) {
             // An error happened.
             alert(error.message)
           });
     }
+
+    if(!isAuthenticated) {
+      return <Redirect to='/' />
+  }
    
     return(
         <>
