@@ -26,7 +26,7 @@ export default function Navbar() {
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <SrNavLink className="nav-link" to="/workers">Maistrii</SrNavLink>
+                        <SrNavLink className="nav-link" to="/workers">Maistri</SrNavLink>
                     </li>
                     <li className="nav-item">
                         <SrNavLink className="nav-link" to="/add">Adaugare maistru</SrNavLink>
