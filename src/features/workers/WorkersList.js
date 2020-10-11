@@ -23,7 +23,7 @@ export default function WorkersList() {
     }, [db]);
    
     if(!workers) {
-        return <h1>Nu au fost adaugati mesteri ...</h1>;
+        return <h1>Nu au fost adaugati maistri ...</h1>;
     }
 
     const locations = [];
