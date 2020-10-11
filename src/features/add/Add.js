@@ -84,23 +84,18 @@ export default function Add() {
                     <h1 className="display-4">Maistru</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <input className="form-control" {...bindInput('todo')} />
-                        </div>
-                        <div className="form-group">
-                            <input type="file" className="" id="customFile" onChange={ handleFile } />
-                            {/* <label class="custom-file-label" for="customFile">Choose file</label> */}
+                            <input className="form-control" {...bindInput('worker')} />
                         </div>
                         <button className="btn btn-primary">Adaugare</button>
                     </form>
                 </div>
             </div>
             <br />
-            { items.map(todo => (
-                <p key={todo.id}>
+            { items.map(worker => (
+                <p key={worker.id}>
                     <label>
-                        <input type="checkbox" checked={ todo.status === 'COMPLETED' } onChange={ () => handleChange(todo.id) } />
-                        { todo.title }
-                        <img src={todo.fileUrl} alt="Todo" />
+                        <input type="checkbox" checked={ worker.status === 'COMPLETED' } onChange={ () => handleChange(worker.id) } />
+                        { worker.title }
                     </label>
                 </p>
             )) }
