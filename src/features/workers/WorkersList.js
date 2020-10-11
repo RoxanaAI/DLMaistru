@@ -3,9 +3,8 @@ import Worker from './Worker';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-const initialFormValues = {worker: ''};
 
-// TODO display all the workers not only from the current user
+// TODO need to clear the database because now we have workers with the same ID
 export default function WorkersList() {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
@@ -15,7 +14,7 @@ export default function WorkersList() {
             .onSnapshot((docs) => {
                 const workers = [];
                 docs.forEach((doc) => {
-                    const worker = {...doc.data(), id: doc.id}
+                    const worker = {...doc.data(), id: doc.workerid}
                     workers.push(worker);
                 });
                 setItem(workers);

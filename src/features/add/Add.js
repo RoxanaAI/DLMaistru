@@ -35,6 +35,7 @@ export default function Add() {
     // TODO Adaugare maistru to be available only if login
     async function handleSubmit(e) {
         e.preventDefault();
+
         try {
             const workerId = user.uid + Math.random();
             const workerRef = await db.collection("workersCollection").add({   
