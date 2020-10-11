@@ -17,30 +17,30 @@ export default function Add() {
 
     useEffect(() => {
         if(user) {
-            db.collection("todos")
+            db.collection("workersCollection")
                 .where("user", "==", user.uid)
                 .onSnapshot((docs) => {
-                    const todos = [];
+                    const newWorkers = [];
                     docs.forEach((doc) => {
-                        const todo = {...doc.data(), id: doc.id}
-                        todos.push(todo);
+                        const worker = {...doc.data(), id: doc.id}
+                        newWorkers.push(worker);
                     });
-                    setItem(todos);
-                    console.log(todos)
+                    setItem(newWorkers);
+                    console.log(newWorkers)
                 });   
         }     
     }, [db, user]);
 
     
-    async function handleChange(todoId) {
-        const todo = items.find(todo => todo.id === todoId);
-        const todoRef = db.collection("todos").doc(todoId);
+    async function handleChange(workerId) {
+        const worker = items.find(worker => worker.id === workerId);
+        const workerRef = db.collection("workersCollection").doc(workerId);
         
-        todo.status = todo.status === 'NOT_COMPLETED' ? 'COMPLETED' : 'NOT_COMPLETED'
+        worker.status = worker.status === 'NOT_COMPLETED' ? 'COMPLETED' : 'NOT_COMPLETED'
         
         try {
-            await todoRef.update({
-                status: todo.status
+            await workerRef.update({
+                status: worker.status
             });            
             console.log("Document successfully updated!");
         } catch(error) {
@@ -60,7 +60,7 @@ export default function Add() {
             const snapshot = await upload.put(file)
             const fileUrl = await snapshot.ref.getDownloadURL();
 
-            const docRef = await db.collection("todos").add({
+            const docRef = await db.collection("workersCollection").add({
                 title: values.todo,
                 status: 'NOT_COMPLETED',
                 user: user.uid,
@@ -81,7 +81,7 @@ export default function Add() {
         <div>
             <div className="jumbotron jumbotron-fluid">
                 <div className="container">
-                    <h1 className="display-4">Todos</h1>
+                    <h1 className="display-4">Maistru</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <input className="form-control" {...bindInput('todo')} />
@@ -90,7 +90,7 @@ export default function Add() {
                             <input type="file" className="" id="customFile" onChange={ handleFile } />
                             {/* <label class="custom-file-label" for="customFile">Choose file</label> */}
                         </div>
-                        <button className="btn btn-primary">Add Todo</button>
+                        <button className="btn btn-primary">Adaugare</button>
                     </form>
                 </div>
             </div>
