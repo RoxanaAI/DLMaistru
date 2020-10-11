@@ -32,12 +32,14 @@ export default function Add() {
     
     // TODO align better the form
     // TODO Add validation for all the input data. All the items should be filed in
-    // TODO Add the id for the new item
+    // TODO Adaugare maistru to be available only if login
     async function handleSubmit(e) {
         e.preventDefault();
         try {
+            const workerId = user.uid + Math.random();
             const workerRef = await db.collection("workersCollection").add({   
                 user: user.uid,
+                workerid:  workerId,
                 name: values.name,
                 specialization: values.specialization,
                 location: values.location,
