@@ -43,7 +43,8 @@ export default function Add() {
                 name: values.name,
                 specialization: values.specialization,
                 location: values.location,
-                description: values.description,
+                phoneNumber: values.telefon,
+                description: values.description, 
             });
             
             console.log("Worker added with Id: ", workerRef.id);
@@ -71,6 +72,10 @@ export default function Add() {
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Localitate </label>
                                 <input className="col-sm-9 form-control form-location" {...bindInput('location')} placeholder="Localitate" />
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-sm-3 col-form-label"> Telefon </label>
+                                <input className="col-sm-9 form-control form-location" {...bindInput('phoneNumber')} placeholder="Telefon" />
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Descriere</label> 

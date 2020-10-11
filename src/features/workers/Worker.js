@@ -8,6 +8,7 @@ export default function Worker({ worker }) {
                 { worker.name }
                 { worker.specialization }
                 { worker.location }
+                { worker.phoneNumber }
                 { worker.description }
             </dd>
         </React.Fragment>
