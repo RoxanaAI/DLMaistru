@@ -23,7 +23,7 @@ export default function Navbar() {
     return (
       <nav className="navbar navbar-light navbar-expand ">
             <img src={logo} alt="logo-mistru" className="logo"></img>
-            <Link className="navbar-brand" to="/">DLMaistru</Link>
+            <Link className="navbar-brand" to="/">DL. Maistru</Link>
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
