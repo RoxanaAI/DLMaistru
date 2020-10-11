@@ -9,25 +9,25 @@ import  Logout  from './features/auth/Logout';
 import  Navbar  from './components/Navbar';
 import  WorkerDetails  from './features/workers/WorkerDetails';
 import  WorkersList  from './features/workers/WorkersList';
+import Add from './features/add/Add';
 import { AuthContextProvider } from './features/auth/AuthContext';
 
 function App() {
 
   return (
-    <div>
+    <div className="container">
       <AuthContextProvider>
       <Router>
       <Navbar />
-      <main>
         <Switch>
             <Route exact path="/workers" component={WorkersList} />
             <Route exact path="/workers/:id" component={WorkerDetails} />
+            <Route exact path="/add" component={Add} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/" component={Home} />
             <Route component={() => <h1>404</h1>} />
         </Switch>
-      </main>
       </Router>
     </AuthContextProvider>
     </div>
