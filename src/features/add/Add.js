@@ -37,6 +37,8 @@ export default function Add() {
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO apply the filters values
+    // TODO cand dai deconectare sa te duca pe home
+    // TODO inregistrare nu mai merge dupa deconectare
 
     async function handleSubmit(e) {
         e.preventDefault();
