@@ -12,17 +12,22 @@ export default function WorkerDetails() {
         return <h1>Loading ...</h1>;
     }
 
+    // { worker.specialization }
+    // { worker.location }
+    // { worker.phoneNumber }
+    // { worker.description }
+
     return (
         <div>
-            <h1>{ worker.title }</h1>
+            <h1>{ worker.name }</h1>
             <div className="form-group row">
-                <label htmlFor="title" className="col-sm-2 col-form-label">Title</label>
+                <label htmlFor="name" className="col-sm-2 col-form-label">Nume</label>
                 <div className="col-sm-10">
-                    <input type="text" className="form-control" id="title" {...bindInput('title')} />
-                    {values?.title}
+                    <input type="text" className="form-control" id="name" {...bindInput('name')} />
+                    {values?.name}
                 </div>
             </div>
-            <div className="form-group row">
+            {/* <div className="form-group row">
                 <label htmlFor="genre" className="col-sm-2 col-form-label">Genre</label>
                 <div className="col-sm-10">
                     <input type="text" className="form-control" id="genre" {...bindInput('genre')} />
@@ -35,7 +40,7 @@ export default function WorkerDetails() {
                     <input type="text" className="form-control" id="publisher" {...bindInput('publisher')} />
                     {values?.publisher}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

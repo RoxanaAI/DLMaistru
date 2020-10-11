@@ -27,7 +27,6 @@ export default function WorkersList() {
 
     return (
         <>
-            <h1>Workers</h1>
             <dl>
                 { workers.map(item => <Worker key={item.workerid} worker={item} />) }
             </dl>
