@@ -9,7 +9,7 @@ import { AuthContext } from '../auth/AuthContext';
 const initialFormValues = {item: ''};
 
 export default function Add() {
-    const [items, setItem] = useState([]);
+    const [, setItem] = useState([]);
     const { bindInput, values } = useForm(initialFormValues);
     const { user } = useContext(AuthContext);
     const db = firebase.firestore();
@@ -34,9 +34,11 @@ export default function Add() {
         e.preventDefault();
         try {
             const workerRef = await db.collection("workersCollection").add({
-                title: values.title,
-
                 user: user.uid,
+                name: values.name,
+                specialization: values.specialization,
+                location: values.location,
+                description: values.description,
             });
             
             console.log("Worker added with Id: ", workerRef.id);
@@ -52,7 +54,10 @@ export default function Add() {
                     <h1 className="display-4">Maistru</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <input className="form-control" {...bindInput('title')} />
+                            <div><label> Nume si prenume <input className="form--name" {...bindInput('name')} /> </label>  </div>
+                            <div><label> Specializare <input className="form-specialization" {...bindInput('specialization')} /> </label> </div>
+                            <div><label> Localitate <input className="form-location" {...bindInput('location')} /> </label> </div>
+                            <div><label> Descriere <input className="form-description" {...bindInput('description')} /> </label> </div>
                         </div>
                         <button className="btn btn-primary">Adaugare</button>
                     </form>
