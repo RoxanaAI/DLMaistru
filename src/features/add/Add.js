@@ -30,6 +30,8 @@ export default function Add() {
         }     
     }, [db, user]);
     
+    // TODO align better the form
+    // TODO Add validation for all the input data. All the items should be filed in
     async function handleSubmit(e) {
         e.preventDefault();
         try {

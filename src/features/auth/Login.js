@@ -25,6 +25,8 @@ export default function Login(){
         return <Redirect to='/' />
     }
 
+    // TODO - remember input
+
     return(
         <>
         <div className="login">
