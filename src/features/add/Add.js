@@ -35,7 +35,8 @@ export default function Add() {
     // TODO Add validation for all the input data. All the items should be filed in
     // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
-    // TODO - remember input login user input
+    // TODO remember input login user input
+    // TODO apply the filters values
 
     async function handleSubmit(e) {
         e.preventDefault();
