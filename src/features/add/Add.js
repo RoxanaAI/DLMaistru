@@ -32,11 +32,12 @@ export default function Add() {
     
     // TODO align better the form
     // TODO Add validation for all the input data. All the items should be filed in
+    // TODO Add the id for the new item
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const workerRef = await db.collection("workersCollection").add({
-                user: user.id,
+            const workerRef = await db.collection("workersCollection").add({   
+                user: user.uid,
                 name: values.name,
                 specialization: values.specialization,
                 location: values.location,
