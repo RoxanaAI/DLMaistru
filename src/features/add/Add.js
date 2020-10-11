@@ -10,7 +10,6 @@ const initialFormValues = {item: ''};
 
 export default function Add() {
     const [items, setItem] = useState([]);
-    const [file, setFile] = useState(null);
     const { bindInput, values } = useForm(initialFormValues);
     const { user } = useContext(AuthContext);
     const db = firebase.firestore();
@@ -30,51 +29,20 @@ export default function Add() {
                 });   
         }     
     }, [db, user]);
-
-    
-    async function handleChange(workerId) {
-        const worker = items.find(worker => worker.id === workerId);
-        const workerRef = db.collection("workersCollection").doc(workerId);
-        
-        worker.status = worker.status === 'NOT_COMPLETED' ? 'COMPLETED' : 'NOT_COMPLETED'
-        
-        try {
-            await workerRef.update({
-                status: worker.status
-            });            
-            console.log("Document successfully updated!");
-        } catch(error) {
-            // The document probably doesn't exist.
-            console.warn("Error updating document: ", error);
-        };
-        
-        setItem([...items]);
-    }
     
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const storage = firebase.storage().ref();
+            const workerRef = await db.collection("workersCollection").add({
+                title: values.title,
 
-            const upload = storage.child(`images/${file.name}`);
-            const snapshot = await upload.put(file)
-            const fileUrl = await snapshot.ref.getDownloadURL();
-
-            const docRef = await db.collection("workersCollection").add({
-                title: values.todo,
-                status: 'NOT_COMPLETED',
                 user: user.uid,
-                fileUrl
             });
             
-            console.log("Document written with ID: ", docRef.id);
+            console.log("Worker added with Id: ", workerRef.id);
         } catch(error) {
-            console.warn("Error adding document: ", error);
+            console.warn("Error adding worker: ", error);
         };
-    }
-
-    function handleFile(e) {
-        setFile(e.target.files[0]);
     }
 
     return (
@@ -84,21 +52,12 @@ export default function Add() {
                     <h1 className="display-4">Maistru</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
-                            <input className="form-control" {...bindInput('worker')} />
+                            <input className="form-control" {...bindInput('title')} />
                         </div>
                         <button className="btn btn-primary">Adaugare</button>
                     </form>
                 </div>
             </div>
-            <br />
-            { items.map(worker => (
-                <p key={worker.id}>
-                    <label>
-                        <input type="checkbox" checked={ worker.status === 'COMPLETED' } onChange={ () => handleChange(worker.id) } />
-                        { worker.title }
-                    </label>
-                </p>
-            )) }
         </div>
     )
 }
