@@ -41,12 +41,12 @@ export default function WorkersList() {
     return (
         <>
             <div className="">
-                <label className="col-sm-3 col-form-label"> Filtru localitate </label>
+                <label className=""> Filtru localitate </label>
                 <Dropdown options={locations} value={locations[0]} placeholder="Filtru localitate" />
             </div>
 
             <div className="">
-                <label className="col-sm-3 col-form-label"> Filtru specializare </label>
+                <label className=""> Filtru specializare </label>
                 <Dropdown options={specializations} value={specializations[0]} placeholder="Filtru specializare" />
             </div>          
 

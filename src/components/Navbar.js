@@ -46,10 +46,10 @@ export default function Navbar() {
                     ) : (
                         <>
                             <li className="nav-item">
-                                Welcome, {user.email}!
+                                Bine ati venit, {user.email}!
                             </li>
                             <li className="nav-item">
-                                <a href="/" onClick={handleLogout}>Logout</a>
+                                <a href="/" onClick={handleLogout}>Deconectare</a>
                             </li>
                         </>
                     )}
