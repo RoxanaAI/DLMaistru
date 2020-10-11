@@ -43,7 +43,7 @@ export default function Add() {
                 name: values.name,
                 specialization: values.specialization,
                 location: values.location,
-                phoneNumber: values.telefon,
+                phoneNumber: values.phoneNumber,
                 description: values.description, 
             });
             
