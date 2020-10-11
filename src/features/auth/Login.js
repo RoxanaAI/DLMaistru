@@ -25,22 +25,21 @@ export default function Login(){
         return <Redirect to='/' />
     }
 
-    // TODO - remember input
-
     return(
         <>
         <div className="login">
         <form onSubmit={handleSubmit}>
             <p className="form-group">
             <label htmlFor="email" >Email: </label>
-            <input type='email' name="email" id="email" {...bindInput('email')} className="form-control" aria-describedby="emailHelp" placeholder="Enter email" required/>
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input type='email' name="email" id="email" {...bindInput('email')} className="form-control" aria-describedby="emailHelp" placeholder="Email" required/>
+            <small id="emailHelp" className="form-text text-muted">Aceste email nu se va transmite mai departe.</small>
             </p>
             <p className="form-group">
-            <label htmlFor="password">Password: </label>
-            <input type='password' name="password" id="password" {...bindInput('password')} className="form-control" placeholder="Password" required/>
+            <label htmlFor="password">Parola: </label>
+            <input type='password' name="password" id="password" {...bindInput('password')} className="form-control" placeholder="Parola" required/>
             </p>
-            <button type="submit" className="btn btn-primary"> Submit</button>
+            {/* checkbox tine ma minte */}
+            <button type="submit" className="btn btn-primary"> Conectare</button>
         </form>
         </div>
         </>

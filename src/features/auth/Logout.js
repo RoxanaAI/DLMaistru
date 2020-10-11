@@ -23,12 +23,12 @@ export default function Logout(){
     return(
     
          <div className="logout">
-            <p><i className="fa fa-question-circle"></i> Are you sure you want to log-off? <br /></p>
+            <p><i className="fa fa-question-circle"></i> Sigur doriti sa va deconectati? <br /></p>
                 <div className="actionsBtns">
                    <form >
                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                        <input type="submit" className="btn btn-default btn-primary" data-dismiss="modal" value="Logout" onClick={onLogout}/>
-                          <button className="btn btn-default" data-dismiss="modal">Cancel</button>
+                          <button className="btn btn-default" data-dismiss="modal">Anulare</button>
                   </form>
               </div>
         </div>

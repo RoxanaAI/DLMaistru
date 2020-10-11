@@ -37,10 +37,10 @@ export default function Navbar() {
                     {!isAuthenticated ? (
                         <>
                             <li className="nav-item">
-                                <SrNavLink className="nav-link" to="/login">Login</SrNavLink>
+                                <SrNavLink className="nav-link" to="/login">Conectare</SrNavLink>
                             </li>
                             <li className="nav-item">
-                                <SrNavLink className="nav-link" to="/register">Register</SrNavLink>
+                                <SrNavLink className="nav-link" to="/register">Inregistrare</SrNavLink>
                             </li>
                         </>
                     ) : (
