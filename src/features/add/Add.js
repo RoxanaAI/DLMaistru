@@ -36,7 +36,7 @@ export default function Add() {
         e.preventDefault();
         try {
             const workerRef = await db.collection("workersCollection").add({
-                user: user.uid,
+                user: user.id,
                 name: values.name,
                 specialization: values.specialization,
                 location: values.location,
