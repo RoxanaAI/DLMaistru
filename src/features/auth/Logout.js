@@ -1,24 +1,38 @@
-import React from 'react';
+import React,{ useContext }  from 'react';
 import { auth } from 'firebase';
+import { Redirect } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 export default function Logout(){
 
+  const { isAuthenticated } = useContext(AuthContext);
+
     function onLogout() {
        auth().signOut().then(function() {
-            // Sign-out successful.
-            alert('Log out succesfully')
+          
           }).catch(function(error) {
             // An error happened.
             alert(error.message)
           });
     }
+
+    if(!isAuthenticated) {
+      return <Redirect to='/' />
+  }
    
     return(
-        <>
-        <h3>Are you sure that you want to logout?</h3>
-        <button onClick={onLogout}>Yes</button>
-        <button>No</button>
-        </>
+    
+         <div className="logout">
+            <p><i className="fa fa-question-circle"></i> Are you sure you want to log-off? <br /></p>
+                <div className="actionsBtns">
+                   <form >
+                       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                       <input type="submit" className="btn btn-default btn-primary" data-dismiss="modal" value="Logout" onClick={onLogout}/>
+                          <button className="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </form>
+              </div>
+        </div>
+       
     )
 }
 

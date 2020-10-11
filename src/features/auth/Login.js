@@ -1,10 +1,14 @@
 import { auth } from 'firebase';
-import React from 'react';
+import React , { useContext } from 'react';
 import  useForm  from '../../hooks/useForm';
+import { AuthContext } from './AuthContext';
+import { Redirect } from 'react-router-dom';
+
 
 export default function Login(){
   
     const { values, bindInput } = useForm(null);
+    const { isAuthenticated } = useContext(AuthContext);
   
     function handleSubmit(event){
          event.preventDefault();
@@ -16,6 +20,12 @@ export default function Login(){
            alert(errorMessage);
           });;
     }
+
+    if(isAuthenticated) {
+        return <Redirect to='/' />
+    }
+
+    // TODO - remember input
 
     return(
         <>

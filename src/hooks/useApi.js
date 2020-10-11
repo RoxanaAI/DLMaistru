@@ -27,10 +27,10 @@ export default function useApi(endpoint, options) {
         async function getData() {
             try {
                 const res = await fetch(`${baseUrl}/${endpoint}`, fetchOptions);
-                 
+                
                 if(!res.ok) {
                  //  throw new Error(`${res.status}/${res.statusText}`);
-               console.log(res.statusText);
+                console.log(res.statusText);
                 }
 
                 const data = await res.json();

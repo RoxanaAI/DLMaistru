@@ -22,9 +22,9 @@ export default function useForm(initialValues) {
     }
 
     return {
-      values, 
-      handleInputChange,
-      bindInput
+        values, 
+        handleInputChange,
+        bindInput
     };
 }
 

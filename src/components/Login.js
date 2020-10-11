@@ -5,25 +5,24 @@ import  useForm  from '../hooks/CustomForm';
 
 
 export default function Login(){
-  
         const { values, bindInput } = useForm(null);
-  
+
     function handleSubmit(event){
-         event.preventDefault();
+        event.preventDefault();
         auth().signInWithEmailAndPassword(values.email,values.password)
         .then(alert('Succesfully loged in'))
         .catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-           alert(errorMessage);
-          });;
+        alert(errorMessage);
+        });;
     }
 
 return(
     <>
     <div className="login">
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
         <p className="form-group">
         <label htmlFor="email" >Email: </label>
         <input type='email' name="email" id="email" {...bindInput('email')} className="form-control" aria-describedby="emailHelp" placeholder="Enter email" required/>

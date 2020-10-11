@@ -5,7 +5,7 @@ import { auth } from 'firebase';
 export default function Logout(){
 
     function onLogout() {
-       auth().signOut().then(function() {
+      auth().signOut().then(function() {
             // Sign-out successful.
             alert('Log out succesfully')
           }).catch(function(error) {
@@ -14,7 +14,6 @@ export default function Logout(){
           });
     }
 
-   
     return(
         <>
         <h3>Are you sure that you want to logout?</h3>

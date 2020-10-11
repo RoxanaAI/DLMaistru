@@ -4,17 +4,10 @@ import {useForm, useApi} from '../../hooks';
 
 export default function WorkerDetails() {
     const { id } = useParams();
-    const [ worker,  _, mutate] =  useApi(`games/${id}`); //useApi(`games/${workerId}`);
+    const [ worker ] =  useApi(`games/${id}`);
 
     const {values, bindInput} = useForm(worker);
 
-    function handleSubmit() {
-        console.log(values);
-        const { _id, ...rest } = values;
-        mutate(rest);
-    }
-   
-  // console.log(JSON.stringify(worker._id));
     if(!worker) {
         return <h1>Loading ...</h1>;
     }

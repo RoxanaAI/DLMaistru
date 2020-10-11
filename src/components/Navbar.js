@@ -1,40 +1,71 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../../src/assets/images/mester.jpg'
+import React , {useContext} from 'react';
+import { NavLink, Link, useLocation  } from 'react-router-dom';
+import * as firebase from "firebase/app";
+import "firebase/auth"; 
+
+import { AuthContext } from '../features/auth/AuthContext';
 
 
 export default function Navbar() {
+  const { isAuthenticated, user } = useContext(AuthContext);
+
+  async function handleLogout(e) {
+    e.preventDefault();
+
+    try {
+        await firebase.auth().signOut();
+    } catch(e) {
+        console.warn(e);
+    } 
+}
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light ">
-          <img src={logo} alt="logo-mistru" className="logo"></img>
-          <a className="navbar-brand" href="#home">
-            <Link to={""} className="nav-brand">Maistru</Link>
-          </a>        
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="#home"><span className="sr-only">(current)</span>
-                <Link to={"/games"} className="nav-link">Workers</Link></a>
-              </li>
-              </ul>
-              <ul className="navbar-nav navbar-right">
-              <li className="nav-item ">
-                <Link to={"/login"} className="nav-link">Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">Register</Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/logout"} className="nav-link">Logout</Link>
-              </li>
-            </ul>
-          </div>
-      </nav>
+      <nav className="navbar navbar-light navbar-expand ">
+            <img src={logo} alt="logo-mistru" className="logo"></img>
+            <Link className="navbar-brand" to="/">DLMaistru</Link>
+            <div className="collapse navbar-collapse">
+                <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                        <SrNavLink className="nav-link" to="/workers">Maistrii</SrNavLink>
+                    </li>
+                    <li className="nav-item">
+                        <SrNavLink className="nav-link" to="/add">Adaugare maistru</SrNavLink>
+                    </li>
+                </ul>
+                <ul className="navbar-nav">
+                    {!isAuthenticated ? (
+                        <>
+                            <li className="nav-item">
+                                <SrNavLink className="nav-link" to="/login">Login</SrNavLink>
+                            </li>
+                            <li className="nav-item">
+                                <SrNavLink className="nav-link" to="/register">Register</SrNavLink>
+                            </li>
+                        </>
+                    ) : (
+                        <>
+                            <li className="nav-item">
+                                Welcome, {user.email}!
+                            </li>
+                            <li className="nav-item">
+                                <a href="/" onClick={handleLogout}>Logout</a>
+                            </li>
+                        </>
+                    )}
+                </ul>
+            </div>
+        </nav>
     )
 }
 
+function SrNavLink({ children, ...rest}) {
+  const location = useLocation();
+
+  return (
+      <NavLink {...rest}>
+          { children }
+          { location.pathname === rest.to && <span className="sr-only">(current)</span> }
+      </NavLink>
+  );
+}
