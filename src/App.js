@@ -20,8 +20,8 @@ function App() {
       <Navbar />
       <main>
         <Switch>
-            <Route exact path="/games" component={WorkersList} />
-            <Route exact path="/games/:id" component={WorkerDetails} />
+            <Route exact path="/workers" component={WorkersList} />
+            <Route exact path="/workers/:id" component={WorkerDetails} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
             <Route exact path="/" component={Home} />
