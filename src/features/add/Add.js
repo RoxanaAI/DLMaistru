@@ -37,12 +37,18 @@ export default function Add() {
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO apply the filters values
+    // TODO add on the first page home the latest submissions
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
-            const workerId = user.uid + Math.random();
+            const time = new Date().getHours() + ":" +  new Date().getMinutes();
+            const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            const workerId = user.uid + Math.random() + date + time;
+
+            debugger;
+            
             const workerRef = await db.collection("workersCollection").add({   
                 user: user.uid,
                 workerid:  workerId,
@@ -50,7 +56,9 @@ export default function Add() {
                 specialization: values.specialization,
                 location: values.location,
                 phoneNumber: values.phoneNumber,
-                description: values.description, 
+                description: values.description,
+                date: date,
+                time: time,
             });
             
             console.log("Worker added with Id: ", workerRef.id);
