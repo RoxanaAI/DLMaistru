@@ -29,15 +29,14 @@ export default function Add() {
         }     
     }, [db, user]);
     
-    // TODO on the home page to add something there
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Add validation for all the input data. All the items should be filed in
     // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO apply the filters values
-    // TODO add on the first page home the latest submissions
     // TODO remember the last added data in the input
+    // TODO - order by date and time latest section that appear on home page
 
     async function handleSubmit(e) {
         e.preventDefault();

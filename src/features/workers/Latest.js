@@ -25,6 +25,7 @@ export default function Latest() {
         return <h1>Nu au fost adaugati mesteri ...</h1>;
     }
 
+    // TODO - order by date and time
     const latestWorkersList = workers.slice(0, 3);
 
     return (
