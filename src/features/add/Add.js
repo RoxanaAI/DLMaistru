@@ -25,26 +25,27 @@ export default function Add() {
                         newWorkers.push(worker);
                     });
                     setItem(newWorkers);
-                    console.log(newWorkers)
                 });   
         }     
     }, [db, user]);
     
-    // TODO on the home page to add something there
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Add validation for all the input data. All the items should be filed in
     // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO apply the filters values
-    // TODO cand dai deconectare sa te duca pe home
-    // TODO inregistrare nu mai merge dupa deconectare
+    // TODO remember the last added data in the input
+    // TODO - order by date and time latest section that appear on home page
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
-            const workerId = user.uid + Math.random();
+            const time = new Date().getHours() + ":" +  new Date().getMinutes();
+            const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            const workerId = user.uid + Math.random() + date + time;
+            
             const workerRef = await db.collection("workersCollection").add({   
                 user: user.uid,
                 workerid:  workerId,
@@ -52,7 +53,9 @@ export default function Add() {
                 specialization: values.specialization,
                 location: values.location,
                 phoneNumber: values.phoneNumber,
-                description: values.description, 
+                description: values.description,
+                date: date,
+                time: time,
             });
             
             console.log("Worker added with Id: ", workerRef.id);
