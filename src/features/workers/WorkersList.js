@@ -42,7 +42,7 @@ export default function WorkersList() {
         <>
             <div className="">
                 <label className=""> Filtru localitate </label>
-                <Dropdown options={locations} placeholder="Filtru localitate" />
+                <Dropdown options={locations} placeholder="Filtru localitate"/>
             </div>
 
             <div className="">

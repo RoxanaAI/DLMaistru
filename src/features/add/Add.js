@@ -25,7 +25,6 @@ export default function Add() {
                         newWorkers.push(worker);
                     });
                     setItem(newWorkers);
-                    console.log(newWorkers)
                 });   
         }     
     }, [db, user]);
@@ -38,6 +37,7 @@ export default function Add() {
     // TODO remember input login user input
     // TODO apply the filters values
     // TODO add on the first page home the latest submissions
+    // TODO remember the last added data in the input
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -46,8 +46,6 @@ export default function Add() {
             const time = new Date().getHours() + ":" +  new Date().getMinutes();
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
             const workerId = user.uid + Math.random() + date + time;
-
-            debugger;
             
             const workerRef = await db.collection("workersCollection").add({   
                 user: user.uid,
