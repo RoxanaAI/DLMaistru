@@ -32,7 +32,6 @@ export default function Add() {
     }, [db, user]);
 
     function goTo() {
-
          return <Redirect to='/' />
     }
     
@@ -53,7 +52,7 @@ export default function Add() {
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
             const workerId = user.uid + Math.random() + date + time;
             
-            const workerRef = await db.collection("workersCollection").add({   
+            await db.collection("workersCollection").add({   
                 user: user.uid,
                 workerid:  workerId,
                 name: values.name,
@@ -65,13 +64,13 @@ export default function Add() {
                 time: time,
             })
             .then(() => alert('Your profile has been created, '+ values.name))
-            .then(() => values =[] )
+            .then(() => values = [] )
             .then(() => {return <Redirect to='/' />})
                               
         } catch(error) {
             console.warn("Error adding worker: ", error);
         };
-         }
+    }
 
     return (
         <div>
