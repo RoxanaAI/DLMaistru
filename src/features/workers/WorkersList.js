@@ -33,21 +33,27 @@ export default function WorkersList() {
         if(item.location){
             locations.push(item.location);
         }
+    });
+
+    workers.forEach( item => {
         if(item.specialization){
             specializations.push(item.specialization);
         }
     });
 
+let uniqueLocalization = [...new Set(locations)];
+let uniqueSpecialization = [...new Set(specializations)];
+
     return (
         <>
             <div className="">
                 <label className=""> Filtru localitate </label>
-                <Dropdown options={locations} placeholder="Filtru localitate"/>
+                <Dropdown options={uniqueLocalization} placeholder="Filtru localitate"/>
             </div>
 
             <div className="">
                 <label className=""> Filtru specializare </label>
-                <Dropdown options={specializations} placeholder="Filtru specializare" />
+                <Dropdown options={uniqueSpecialization} placeholder="Filtru specializare" />
             </div>          
 
             <dl>

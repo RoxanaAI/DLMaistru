@@ -2,15 +2,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
+import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../hooks';
 import { AuthContext } from '../auth/AuthContext';
 
-const initialFormValues = {item: ''};
+const initialFormValues = [];
 
 export default function Add() {
-    const [, setItem] = useState([]);
-    const { bindInput, values } = useForm(initialFormValues);
+    const [, setItem] = useState(initialFormValues);
+    const { values, bindInput } = useForm(initialFormValues);
     const { user } = useContext(AuthContext);
     const db = firebase.firestore();
 
@@ -26,8 +27,14 @@ export default function Add() {
                     });
                     setItem(newWorkers);
                 });   
-        }     
+        }  
+
     }, [db, user]);
+
+    function goTo() {
+
+         return <Redirect to='/' />
+    }
     
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Add validation for all the input data. All the items should be filed in
@@ -40,7 +47,7 @@ export default function Add() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
+       
         try {
             const time = new Date().getHours() + ":" +  new Date().getMinutes();
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
@@ -56,13 +63,15 @@ export default function Add() {
                 description: values.description,
                 date: date,
                 time: time,
-            });
-            
-            console.log("Worker added with Id: ", workerRef.id);
+            })
+            .then(() => alert('Your profile has been created, '+ values.name))
+            .then(() => values =[] )
+            .then(() => {return <Redirect to='/' />})
+                              
         } catch(error) {
             console.warn("Error adding worker: ", error);
         };
-    }
+         }
 
     return (
         <div>
