@@ -10,8 +10,6 @@ export default function WorkersList({ firstItems }) {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
 
-    console.log(firstItems);
-
     useEffect(() => {
         db.collection("workersCollection")
             .onSnapshot((docs) => {
