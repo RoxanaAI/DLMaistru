@@ -29,9 +29,13 @@ export default function Navbar() {
                     <li className="nav-item">
                         <SrNavLink className="nav-link" to="/workers">Maistri</SrNavLink>
                     </li>
+                
                     <li className="nav-item">
-                        <SrNavLink className="nav-link" to="/add">Adaugare maistru</SrNavLink>
+                    { isAuthenticated ?
+                        <SrNavLink className="nav-link" to="/add">Adaugare maistru</SrNavLink> : null
+                    }
                     </li>
+                              
                 </ul>
                 <ul className="navbar-nav">
                     {!isAuthenticated ? (
