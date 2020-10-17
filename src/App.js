@@ -7,7 +7,7 @@ import  Login  from './features/auth/Login';
 import  Logout  from './features/auth/Logout';
 
 import  Navbar  from './components/Navbar';
-import  WorkersList  from './features/workers/WorkersList';
+import  WorkersPage  from './features/workers/WorkersPage';
 import Add from './features/add/Add';
 import { AuthContextProvider } from './features/auth/AuthContext';
 
@@ -19,7 +19,7 @@ function App() {
       <Router>
       <Navbar />
         <Switch>
-            <Route exact path="/workers" component={WorkersList} />
+            <Route exact path="/workers" component={WorkersPage} />
             <Route exact path="/add" component={Add} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />

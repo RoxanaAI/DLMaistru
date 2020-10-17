@@ -31,10 +31,9 @@ export default function Add() {
 
     }, [db, user]);
 
-    function goTo() {
-
-         return <Redirect to='/' />
-    }
+    // function goTo() {
+    //      return <Redirect to='/' />
+    // }
     
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Add validation for all the input data. All the items should be filed in
@@ -43,7 +42,6 @@ export default function Add() {
     // TODO remember input login user input
     // TODO apply the filters values
     // TODO remember the last added data in the input
-    // TODO - order by date and time latest section that appear on home page
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -53,7 +51,7 @@ export default function Add() {
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
             const workerId = user.uid + Math.random() + date + time;
             
-            const workerRef = await db.collection("workersCollection").add({   
+            await db.collection("workersCollection").add({   
                 user: user.uid,
                 workerid:  workerId,
                 name: values.name,
@@ -65,13 +63,13 @@ export default function Add() {
                 time: time,
             })
             .then(() => alert('Your profile has been created, '+ values.name))
-            .then(() => values =[] )
+            .then(() => [] )
             .then(() => {return <Redirect to='/' />})
                               
         } catch(error) {
             console.warn("Error adding worker: ", error);
         };
-         }
+    }
 
     return (
         <div>

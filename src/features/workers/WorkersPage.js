@@ -1,11 +1,11 @@
+
 import React, { useEffect, useState } from 'react'
-import Worker from './Worker';
+import WorkersList from './WorkersList';
+import WorkersFilters from './WorkersFilters';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-import 'react-dropdown/style.css';
-
-export default function Latest() {
+export default function WorkersPage() {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
 
@@ -20,20 +20,15 @@ export default function Latest() {
                 setItem(workers);
         });    
     }, [db]);
-   
+    
     if(!workers) {
-        return <h1>Nu au fost adaugati mesteri ...</h1>;
+        return <h1>Nu au fost adaugati maistri ...</h1>;
     }
-
-    // TODO - order by date and time
-    const latestWorkersList = workers.slice(0, 3);
 
     return (
         <>
-            <h2>Anunturi recente</h2>  
-            <dl>
-                { latestWorkersList.map(item => <Worker key={item.workerid} worker={item} />) }
-            </dl>
+            <WorkersFilters workers={workers}></WorkersFilters>
+            <WorkersList firstItems={false}></WorkersList>
         </>
     );
 }

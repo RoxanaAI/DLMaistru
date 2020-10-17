@@ -3,10 +3,7 @@ import Worker from './Worker';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
-
-export default function WorkersList() {
+export default function WorkersList({ firstItems }) {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
 
@@ -26,39 +23,47 @@ export default function WorkersList() {
         return <h1>Nu au fost adaugati maistri ...</h1>;
     }
 
-    const locations = [];
-    const specializations = [];
-
-    workers.forEach( item => {
-        if(item.location){
-            locations.push(item.location);
-        }
+    workers.sort(function(first, second){       
+        return sortWorkersByDateAndTime(first, second)
     });
 
-    workers.forEach( item => {
-        if(item.specialization){
-            specializations.push(item.specialization);
-        }
-    });
-
-let uniqueLocalization = [...new Set(locations)];
-let uniqueSpecialization = [...new Set(specializations)];
+     let displayWorkers = workers;
+     if(firstItems) {
+        displayWorkers = workers.slice(0,3);
+     }
 
     return (
         <>
-            <div className="">
-                <label className=""> Filtru localitate </label>
-                <Dropdown options={uniqueLocalization} placeholder="Filtru localitate"/>
-            </div>
-
-            <div className="">
-                <label className=""> Filtru specializare </label>
-                <Dropdown options={uniqueSpecialization} placeholder="Filtru specializare" />
-            </div>          
-
             <dl>
-                { workers.map(item => <Worker key={item.workerid} worker={item} />) }
+                { displayWorkers.map(item => <Worker key={item.workerid} worker={item} />) }
             </dl>
         </>
     );
+}
+
+function sortWorkersByDateAndTime(first, second) {       
+    if(null == first.date || null == second.date) {
+        return 1;
+    }
+    
+    if(first.date !== second.date) {
+        const dateDif = new Date(first.date) - new Date(second.date);
+        return dateDif > 0 ? -1: 1;
+    }
+
+    if(null == first.time || null == second.time) {
+        return 1;
+    }
+
+    var firstTime = first.time.split(":");
+    var secontTime = second.time.split(":");
+
+    const hourDif = firstTime[0] - secontTime[0];
+    const timeDif = firstTime[1] - secontTime[1]
+
+    if(hourDif !== 0){
+        return hourDif > 0 ? -1 : 1;
+    }else {
+        return timeDif > 0 ? -1 : 1;
+    }
 }

@@ -7,6 +7,10 @@ export default function Worker({ worker }) {
             <h1>{ worker.name }</h1>
 
             <div className="">
+                <label className=""> Adaugat la: </label> {worker.time}  {worker.date}
+            </div>
+
+            <div className="">
                 <label className=""> Specializare: </label> {worker.specialization}
             </div>
 
