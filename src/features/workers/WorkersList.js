@@ -3,9 +3,6 @@ import Worker from './Worker';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
-
 export default function WorkersList({ firstItems }) {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
@@ -35,22 +32,8 @@ export default function WorkersList({ firstItems }) {
         displayWorkers = workers.slice(0,3);
      }
 
-    const dropDownData = getDropDownData(workers);
-    let uniqueLocalization = [...new Set(dropDownData[0])];
-    let uniqueSpecialization = [...new Set(dropDownData[1])];
-
     return (
         <>
-            <div className="">
-                <label className=""> Filtru localitate </label>
-                <Dropdown options={uniqueLocalization} placeholder="Filtru localitate"/>
-            </div>
-
-            <div className="">
-                <label className=""> Filtru specializare </label>
-                <Dropdown options={uniqueSpecialization} placeholder="Filtru specializare" />
-            </div>          
-
             <dl>
                 { displayWorkers.map(item => <Worker key={item.workerid} worker={item} />) }
             </dl>
@@ -83,19 +66,4 @@ function sortWorkersByDateAndTime(first, second) {
     }else {
         return timeDif > 0 ? -1 : 1;
     }
-}
-
-function getDropDownData(workers) {
-    const locations = new Set();
-    const specializations = new Set();
-    workers.forEach( item => {
-        if(item.location){
-            locations.add(item.location);
-        }
-        if(item.specialization){
-            specializations.add(item.specialization);
-        }
-    });
-
-    return [locations, specializations];
 }
