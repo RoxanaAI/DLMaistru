@@ -42,7 +42,6 @@ export default function Add() {
     // TODO remember input login user input
     // TODO apply the filters values
     // TODO remember the last added data in the input
-    // TODO - order by date and time latest section that appear on home page
 
     async function handleSubmit(e) {
         e.preventDefault();
