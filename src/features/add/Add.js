@@ -31,9 +31,9 @@ export default function Add() {
 
     }, [db, user]);
 
-    function goTo() {
-         return <Redirect to='/' />
-    }
+    // function goTo() {
+    //      return <Redirect to='/' />
+    // }
     
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Add validation for all the input data. All the items should be filed in
@@ -64,7 +64,7 @@ export default function Add() {
                 time: time,
             })
             .then(() => alert('Your profile has been created, '+ values.name))
-            .then(() => values = [] )
+            .then(() => [] )
             .then(() => {return <Redirect to='/' />})
                               
         } catch(error) {
