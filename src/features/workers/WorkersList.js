@@ -37,19 +37,9 @@ export default function WorkersList({ firstItems }) {
         displayWorkers = workers.slice(0,3);
      }
 
-    const locations = new Set();
-    const specializations = new Set();
-    displayWorkers.forEach( item => {
-        if(item.location){
-            locations.add(item.location);
-        }
-        if(item.specialization){
-            specializations.add(item.specialization);
-        }
-    });
-
-    let uniqueLocalization = [...new Set(locations)];
-    let uniqueSpecialization = [...new Set(specializations)];
+    const dropDownData = getDropDownData(workers);
+    let uniqueLocalization = [...new Set(dropDownData[0])];
+    let uniqueSpecialization = [...new Set(dropDownData[1])];
 
     return (
         <>
@@ -95,4 +85,19 @@ function sortWorkersByDateAndTime(first, second) {
     }else {
         return timeDif > 0 ? -1 : 1;
     }
+}
+
+function getDropDownData(workers) {
+    const locations = new Set();
+    const specializations = new Set();
+    workers.forEach( item => {
+        if(item.location){
+            locations.add(item.location);
+        }
+        if(item.specialization){
+            specializations.add(item.specialization);
+        }
+    });
+
+    return [locations, specializations];
 }
