@@ -3,7 +3,7 @@ import React from 'react'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-export default function Filters({ workers }) {
+export default function WorkersFilters({ workers }) {
 
     const dropDownData = getDropDownData(workers);
     let uniqueLocalization = [...new Set(dropDownData[0])];
