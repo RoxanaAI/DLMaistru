@@ -6,9 +6,11 @@ import 'firebase/storage';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-export default function WorkersList() {
+export default function WorkersList({ firstItems }) {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
+
+    console.log(firstItems);
 
     useEffect(() => {
         db.collection("workersCollection")
@@ -53,9 +55,14 @@ export default function WorkersList() {
         }
      });
 
+     let displayWorkers = workers;
+     if(firstItems) {
+        displayWorkers = workers.slice(0,3);
+     }
+
     const locations = new Set();
     const specializations = new Set();
-    workers.forEach( item => {
+    displayWorkers.forEach( item => {
         if(item.location){
             locations.add(item.location);
         }
@@ -80,7 +87,7 @@ export default function WorkersList() {
             </div>          
 
             <dl>
-                { workers.map(item => <Worker key={item.workerid} worker={item} />) }
+                { displayWorkers.map(item => <Worker key={item.workerid} worker={item} />) }
             </dl>
         </>
     );
