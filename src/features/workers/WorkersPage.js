@@ -32,10 +32,10 @@ export default function WorkersPage( {firstItems}) {
 
     if(firstItems) {
        return (
-        <>
-            <WorkersList firstItems={false} workers={workers.slice(0,3)}></WorkersList>
-        </>
-    );
+            <>
+                <WorkersList firstItems={false} workers={workers.slice(0,3)}></WorkersList>
+            </>
+        );
     } else {
         return (
             <>
