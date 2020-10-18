@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-export const DropdownFilter = ({ dropdownList, dropDownTitle, dropDownPlaceholder }) => {
+export const DropdownFilter = ({ dropdownList, dropDownTitle }) => {
   const [currentSelection, setCurrentSelection] = useState(dropdownList)
   
   const changeSelection = (newSelection) => {
@@ -17,7 +17,7 @@ export const DropdownFilter = ({ dropdownList, dropDownTitle, dropDownPlaceholde
                         <Dropdown options = {dropdownList}
                                   onChange = {(event) => changeSelection(event.value)}
                                   value = {currentSelection}
-                                  placeholder = {dropDownPlaceholder} />
+                                  placeholder = "Selectare" />
                     </div>
                 </>
             );
