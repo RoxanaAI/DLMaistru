@@ -3,6 +3,7 @@ import WorkersList from './WorkersList';
 import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
+import ResetButton from '../buttons/ResetButton';
 
 export default function WorkersPage( {firstItems}) {
     const [workers, setItem] = useState([]);
@@ -39,8 +40,9 @@ export default function WorkersPage( {firstItems}) {
     } else {
         return (
             <>
-                <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"}></DropdownFilter>
+                <DropdownFilter id="localizationDropdown" dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"}></DropdownFilter>
                 <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"}></DropdownFilter>
+                <ResetButton></ResetButton>
                 <WorkersList firstItems={false} workers={workers}></WorkersList>
             </>
         );
