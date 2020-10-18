@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import WorkersList from './WorkersList';
-import WorkersFilters from './WorkersFilters';
-import DropdownFilter  from './DropdownFilter';
+import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
