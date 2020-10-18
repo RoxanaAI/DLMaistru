@@ -4,7 +4,7 @@ import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-export default function WorkersPage() {
+export default function WorkersPage( {firstItems}) {
     const [workers, setItem] = useState([]);
     const db = firebase.firestore();
 
@@ -30,11 +30,16 @@ export default function WorkersPage() {
 
     const dropDownData = getDropDownData(workers);
 
+    let displayWorkers = workers;
+    if(firstItems) {
+       displayWorkers = workers.slice(0,3);
+    }
+
     return (
         <>
             <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"}></DropdownFilter>
             <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"}></DropdownFilter>
-            <WorkersList firstItems={false} workers={workers}></WorkersList>
+            <WorkersList firstItems={false} workers={displayWorkers}></WorkersList>
         </>
     );
 }
