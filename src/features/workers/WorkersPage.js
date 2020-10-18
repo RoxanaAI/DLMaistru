@@ -30,18 +30,21 @@ export default function WorkersPage( {firstItems}) {
 
     const dropDownData = getDropDownData(workers);
 
-    let displayWorkers = workers;
     if(firstItems) {
-       displayWorkers = workers.slice(0,3);
-    }
-
-    return (
+       return (
         <>
-            <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"}></DropdownFilter>
-            <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"}></DropdownFilter>
-            <WorkersList firstItems={false} workers={displayWorkers}></WorkersList>
+            <WorkersList firstItems={false} workers={workers.slice(0,3)}></WorkersList>
         </>
     );
+    } else {
+        return (
+            <>
+                <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"}></DropdownFilter>
+                <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"}></DropdownFilter>
+                <WorkersList firstItems={false} workers={workers}></WorkersList>
+            </>
+        );
+    }
 }
 
 function sortWorkersByDateAndTime(first, second) {       
