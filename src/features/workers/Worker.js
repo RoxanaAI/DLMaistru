@@ -4,26 +4,33 @@ export default function Worker({ worker }) {
 
     return (
         <React.Fragment key={worker.id}>
-            <h1>{ worker.name }</h1>
+            <div className="worker-view">
+                <h1>{ worker.name }</h1>
 
-            <div className="">
-                <label className=""> Adaugat la: </label> {worker.time}  {worker.date}
-            </div>
+                <div className="worker-body">
+                    <label className=""> Adaugat la: </label> 
+                    <label className="worker-body__content"> {worker.time}  {worker.date} </label>
+                </div>
 
-            <div className="">
-                <label className=""> Specializare: </label> {worker.specialization}
-            </div>
+                <div className="worker-body">
+                    <label className=""> Specializare: </label> 
+                    <label className="worker-body__content"> {worker.specialization} </label>
+                </div>
 
-            <div className="">
-                <label className=""> Localitate: </label> { worker.location }
-            </div>
+                <div className="worker-body">
+                    <label className=""> Localitate: </label> 
+                    <label className="worker-body__content">{ worker.location } </label>
+                </div>
 
-            <div className="">
-                <label className=""> Telefon: </label> { worker.phoneNumber }
-            </div>
+                <div className="worker-body">
+                    <label className=""> Telefon: </label> 
+                    <label className="worker-body__content"> { worker.phoneNumber } </label>
+                </div>
 
-            <div className="">
-                <label className=""> Descriere: </label> { worker.description }
+                <div className="worker-body">
+                    <label className=""> Descriere: </label> 
+                    <label className="worker-body__content"> { worker.description } </label>
+                </div>
             </div>
         </React.Fragment>
     );

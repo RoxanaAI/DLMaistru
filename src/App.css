@@ -62,3 +62,23 @@ button{
   margin-top: 20px;
 }
 
+.worker-view {
+  border-bottom: 1px solid gray;
+}
+
+.worker-body{
+  position: relative;
+  display: flex;
+  /* justify-content: space-around; */
+  border-bottom: 1px solid white ;
+}
+
+.worker-view>h1{
+  padding-bottom: 0px;
+  padding-top: 20px;
+}
+.worker-body__content{
+  position: absolute;
+  left:100px;
+}
+
