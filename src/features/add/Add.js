@@ -76,28 +76,29 @@ export default function Add() {
             {/* <div className="jumbotron jumbotron-fluid"> */}
                 <div className="container">
                     
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} autoComplete="off">
                         <h1 className="display-4">Maistru</h1>
                         {/* <div className="form-group"> */}
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Nume si prenume</label>
-                                <input className="col-sm-9 form-control form--name " {...bindInput('name')} placeholder="Nume si prenume"/>  
+                                <input className="col-sm-9 form-control form--name " {...bindInput('name')} placeholder="Nume si prenume"  type="text" required minLength="3" />  
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Specializare </label> 
-                                <input className="col-sm-9 form-control form-specialization" {...bindInput('specialization')} placeholder="Specializare" />
+                                <input className="col-sm-9 form-control form-specialization" {...bindInput('specialization')} placeholder="Specializare"  type="text" required  minLength="3" />
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Localitate </label>
-                                <input className="col-sm-9 form-control form-location" {...bindInput('location')} placeholder="Localitate" />
+                                <input className="col-sm-9 form-control form-location" {...bindInput('location')} placeholder="Localitate"  type="text" required minLength="3" />
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Telefon </label>
-                                <input className="col-sm-9 form-control form-location" {...bindInput('phoneNumber')} placeholder="Telefon" />
+                                <input className="col-sm-9 form-control form-location" {...bindInput('phoneNumber')} placeholder="Telefon" type="tel" pattern="[0-9]{4} [0-9]{3} [0-9]{3}" required />
+                                <small>Format: 1234 567 890</small>
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Descriere</label> 
-                                <input className="col-sm-9 form-control form-description" {...bindInput('description')} placeholder="Descriere" />
+                                <input className="col-sm-9 form-control form-description" {...bindInput('description')} placeholder="Descriere" type="text" required  minLength="3" />
                             </div>
                         {/* </div> */}
                         <button className="btn btn-primary">Adaugare</button>
