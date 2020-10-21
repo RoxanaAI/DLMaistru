@@ -3,77 +3,74 @@ import WorkersList from './WorkersList';
 import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
-import ResetButton from '../buttons/ResetButton';
 
-export default function WorkersPage( {firstItems}) {
+export default function WorkersPage() {
     const [workers, setItem] = useState([]);
+    const [filterdWorkers, setFilteredItem] = useState(null);
     const db = firebase.firestore();
+   const [locatization, setLocalization] = useState('');
+   const [specialization, setSpecialization] = useState('');
+   const [primaryExists, setPrimaryExists] = useState(true);
 
-    useEffect(() => {
-        db.collection("workersCollection")
+   let clearSelection= false;
+
+    useEffect( () => {
+        async function fetchData(){
+         await db.collection("workersCollection")
             .onSnapshot((docs) => {
                 const workers = [];
                 docs.forEach((doc) => {
                     const worker = {...doc.data(), id: doc.workerid}
                     workers.push(worker);
                 });
-                setItem(workers);
-        });    
-    }, [db]);
+             const sortedWorkers=sortingWorkers(workers);
+             setItem(sortedWorkers);
+              console.log("in useEffect ")
+              console.log(workers);
+        }); 
+    }   
+    fetchData();
+    }, [db, primaryExists]);
     
     if(!workers) {
         return <h1>Nu au fost adaugati maistri ...</h1>;
     }
 
-    workers.sort(function(first, second){       
-        return sortWorkersByDateAndTime(first, second)
-    });
 
     const dropDownData = getDropDownData(workers);
 
-    if(firstItems) {
-       return (
-            <>
-                <WorkersList firstItems={false} workers={workers.slice(0,3)}></WorkersList>
-            </>
-        );
-    } else {
+    const getFilterLocalization = (selection) =>{
+        setLocalization(selection);
+        const fiteredWorkers =  workers.filter(x => x.location === selection);
+        setItem(fiteredWorkers);
+    }
+
+    const getFilterSpecialization= (selection) =>{
+        setSpecialization(selection);
+        const fiteredWorkers =  workers.filter(x => x.specialization === selection);
+        setItem(fiteredWorkers);
+    }
+
+    function resetFilter(){
+        setPrimaryExists(x=> x=!x);
+ 
+    }
+   
         return (
             <>
-                <DropdownFilter id="localizationDropdown" dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"}></DropdownFilter>
-                <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"}></DropdownFilter>
-                <ResetButton></ResetButton>
+                <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
                 <WorkersList firstItems={false} workers={workers}></WorkersList>
+               
             </>
         );
     }
-}
 
-function sortWorkersByDateAndTime(first, second) {       
-    if(null == first.date || null == second.date) {
-        return 1;
-    }
-    
-    if(first.date !== second.date) {
-        const dateDif = new Date(first.date) - new Date(second.date);
-        return dateDif > 0 ? -1: 1;
-    }
-
-    if(null == first.time || null == second.time) {
-        return 1;
-    }
-
-    var firstTime = first.time.split(":");
-    var secontTime = second.time.split(":");
-
-    const hourDif = firstTime[0] - secontTime[0];
-    const timeDif = firstTime[1] - secontTime[1]
-
-    if(hourDif !== 0){
-        return hourDif > 0 ? -1 : 1;
-    }else {
-        return timeDif > 0 ? -1 : 1;
-    }
+function sortingWorkers(workers){
+    const sortedWorkers= workers.slice().sort((a,b) => new Date(a.date) - new Date(b.date));
+    sortedWorkers.reverse();
+    return sortedWorkers;
 }
 
 function getDropDownData(workers) {

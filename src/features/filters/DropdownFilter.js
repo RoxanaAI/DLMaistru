@@ -3,11 +3,12 @@ import React, { useState } from 'react'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
-export const DropdownFilter = ({ dropdownList, dropDownTitle }) => {
+export const DropdownFilter = ({ dropdownList, dropDownTitle, parentCallback, clearSelection}) => {
   const [currentSelection, setCurrentSelection] = useState("");
   
-  const changeSelection = (newSelection) => {
-    setCurrentSelection(newSelection)
+  const changeSelection = (e) => {
+    setCurrentSelection(e.value);
+    parentCallback(e.value);
   }
 
   dropdownList.sort(function(first, second){       
@@ -17,13 +18,22 @@ export const DropdownFilter = ({ dropdownList, dropDownTitle }) => {
     
     return first.localeCompare(second)
   });
+  let i=1;
+// to be refactored
+  if(!clearSelection && currentSelection) {
+    i++;
+    console.log("in dropdownFilter "+ i)
+    setCurrentSelection(null);
+
+  }
+
 
   return (
                 <>
                     <div className="">
                         <label className=""> {dropDownTitle} </label>
                         <Dropdown options = {dropdownList}
-                                  onChange = {(event) => changeSelection(event.value)}
+                                  onChange = {(e) => changeSelection(e)}
                                   value = {currentSelection}
                                   placeholder = "Selectare" />
                     </div>

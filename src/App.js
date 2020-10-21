@@ -16,17 +16,17 @@ function App() {
   return (
     <div className="container">
       <AuthContextProvider>
-      <Router>
-      <Navbar />
-        <Switch>
-            <Route exact path="/workers" component={WorkersPage} />
-            <Route exact path="/add" component={Add} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/logout" component={Logout} />
-            <Route exact path="/" component={Home} />
-            <Route component={() => <h1>404</h1>} />
-        </Switch>
-      </Router>
+          <Router>
+          <Navbar />
+            <Switch>
+                <Route exact path="/workers" component={WorkersPage} />
+                <Route exact path="/add" component={Add} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Logout} />
+                <Route exact path="/" component={Home} />
+                <Route component={() => <h1>404</h1>} />
+            </Switch>
+          </Router>
     </AuthContextProvider>
     </div>
   );
