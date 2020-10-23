@@ -10,6 +10,7 @@ export default function useForm(initialValues) {
     },[initialValues])
 
     function handleInputChange(e){
+        console.log(e);
         setValues({...values, [e.target.name]: e.target.value})
     }
 
@@ -21,10 +22,24 @@ export default function useForm(initialValues) {
         }
     }
 
+    function handleOptionChange(e){
+        console.log(e);
+        setValues({...values, [e.target.value]: e.target.value})
+    }
+
+    function bindOption(name){
+        return {
+            name,
+            onChange: handleOptionChange,
+            value: values?.[name] ?? ''
+        }
+    }   
+
     return {
         values, 
         handleInputChange,
-        bindInput
+        bindInput,
+        bindOption
     };
 }
 
