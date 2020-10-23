@@ -49,33 +49,33 @@ export default function Add() {
 
         const validationMessage = dataIsValid(values);
         if(validationMessage) {
-            console.log(validationMessage);
             alert(validationMessage);
+            return;
         }
        
-        // try {
-        //     const time = new Date().getHours() + ":" +  new Date().getMinutes();
-        //     const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-        //     const workerId = user.uid + Math.random() + date + time;
+        try {
+            const time = new Date().getHours() + ":" +  new Date().getMinutes();
+            const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            const workerId = user.uid + Math.random() + date + time;
             
-        //     await db.collection("workersCollection").add({   
-        //         user: user.uid,
-        //         workerid:  workerId,
-        //         name: values.name,
-        //         specialization: values.specialization,
-        //         location: values.location,
-        //         phoneNumber: values.phoneNumber,
-        //         description: values.description,
-        //         date: date,
-        //         time: time,
-        //     })
-        //     .then(() => alert('Your profile has been created, '+ values.name))
-        //     .then(() => [] )
-        //     .then(() => {return <Redirect to='/' />})
+            await db.collection("workersCollection").add({   
+                user: user.uid,
+                workerid:  workerId,
+                name: values.name,
+                specialization: values.specialization,
+                location: values.location,
+                phoneNumber: values.phoneNumber,
+                description: values.description,
+                date: date,
+                time: time,
+            })
+            .then(() => alert('Your profile has been created, '+ values.name))
+            .then(() => [] )
+            .then(() => {return <Redirect to='/' />})
                               
-        // } catch(error) {
-        //     console.warn("Error adding worker: ", error);
-        // };
+        } catch(error) {
+            console.warn("Error adding worker: ", error);
+        };
     }
 
     const dropdownList = ["test", "test3"];
