@@ -3,6 +3,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { Redirect } from 'react-router-dom';
+import { Modal } from 'F:/Roxana/IT/cursuri/DlMaistru/src/components/Modal/Modal.js';
+import { useModal } from 'F:/Roxana/IT/cursuri/DlMaistru/src/components/Modal/useModal.js';
 
 import { useForm } from '../../hooks';
 import { AuthContext } from '../auth/AuthContext';
@@ -13,7 +15,9 @@ const initialFormValues = {value: ''};
 
 export default function Add() {
     const [ , setItem ] = useState(initialFormValues);
+    const [validationMessage, setValidationMessage ] = useState("");
     const { values, bindInput, bindOption } = useForm(initialFormValues);
+    const {modalProps, openModal} = useModal();
     const { user } = useContext(AuthContext);
 
     const db = firebase.firestore();
@@ -45,12 +49,6 @@ export default function Add() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
-        const validationMessage = dataIsValid(values);
-        if(validationMessage) {
-            alert(validationMessage);
-            return;
-        }
        
         try {
             const time = new Date().getHours() + ":" +  new Date().getMinutes();
@@ -75,6 +73,14 @@ export default function Add() {
         } catch(error) {
             console.warn("Error adding worker: ", error);
         };
+    }
+
+    function handleAdd(){
+        const validationMessage = dataIsValid(values);
+        if(validationMessage) {
+            setValidationMessage(validationMessage);
+            openModal();
+        }
     }
 
     let json = require('./Cities.json');
@@ -113,8 +119,15 @@ export default function Add() {
                                 <input className="col-sm-9 form-control form-description" {...bindInput('description')} placeholder="Descriere"/>
                             </div>
                         {/* </div> */}
-                        <button className="btn btn-primary">Adaugare</button>
+                        <button className="btn btn-primary" onClick={handleAdd}>Adaugare</button>
                     </form>
+
+                    <Modal {...modalProps} >
+                        <div className="form-group row">
+                            <label className=""> {validationMessage} </label>
+                        </div>
+                    </Modal>
+
                 </div>
             {/* </div> */}
         </div>
@@ -123,19 +136,19 @@ export default function Add() {
 
 function dataIsValid(values) {
     if(values.name === undefined || values.name === null || values.name.length < 3) {
-        return "Va rugam adaugati un nume si prenume valid"
+        return "Va rugam adaugati un nume si prenume valid."
     }
     if(values.specialization === undefined || values.specialization === null || values.specialization.length < 3) {
-        return "Va rugam adaugati o specializare valida"
+        return "Va rugam adaugati o specializare valida."
     }
     // if(values.location === undefined || values.location === null) {
-    //     return "Localitatea trebuie sa fie selectata"
+    //     return "Localitatea trebuie sa fie selectata."
     // }
     if(values.phoneNumber === undefined || values.phoneNumber === null || !checkPhoneNumber(values.phoneNumber)) {
-        return "Va rugam adaugati un numar de telefon valid"
+        return "Va rugam adaugati un numar de telefon valid."
     }
-    if(values.description === undefined || values.description === null || values.description.length < 20) {
-        return "Va rugam adaugati o descriere mai complexa"
+    if(values.description === undefined || values.description === null || values.description.length < 10) {
+        return "Va rugam adaugati o descriere mai complexa."
     }
 
     return null;
