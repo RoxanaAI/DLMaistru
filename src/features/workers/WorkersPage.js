@@ -37,7 +37,7 @@ export default function WorkersPage( {firstItems} ) {
         return (
             <>
                 <WorkersList workers={displayWorkers}></WorkersList>
-                </>
+            </>
         );
     } else {
         function resetFilter(){
