@@ -13,20 +13,20 @@ export default function WorkersPage( {firstItems} ) {
    const db = firebase.firestore();
    useEffect( () => {
         async function fetchData(){
-         await db.collection("workersCollection")
-            .onSnapshot((docs) => {
-                const workers = [];
-                docs.forEach((doc) => {
-                    const worker = {...doc.data(), id: doc.workerid}
-                    workers.push(worker);
-                });
-             const sortedWorkers=sortingWorkers(workers);
-             setItem(sortedWorkers);
-        }); 
-    }   
-    fetchData();
+            await db.collection("workersCollection")
+                .onSnapshot((docs) => {
+                    const workers = [];
+                    docs.forEach((doc) => {
+                        const worker = {...doc.data(), id: doc.workerid}
+                        workers.push(worker);
+                    });
+                const sortedWorkers = workers.sort((first, second) => sortWorkersByDateAndTime(first, second));
+                setItem(sortedWorkers);
+            }); 
+        }   
+        fetchData();
     }, [db, primaryExists]);
-    
+   
     if(!workers) {
         return <h1>Nu au fost adaugati maistri ...</h1>;
     }
@@ -68,11 +68,11 @@ export default function WorkersPage( {firstItems} ) {
     }
 }
 
-function sortingWorkers(workers){
-    const sortedWorkers= workers.slice().sort((a,b) => new Date(a.date) - new Date(b.date));
-    sortedWorkers.reverse();
-    return sortedWorkers;
-}
+// function sortingWorkers(workers){
+//     const sortedWorkers= workers.slice().sort((a,b) => new Date(a.date) - new Date(b.date));
+//     sortedWorkers.reverse();
+//     return sortedWorkers;
+// }
 
 function sortWorkersByDateAndTime(first, second) {       
     if(null == first.date || null == second.date) {
