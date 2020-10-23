@@ -41,7 +41,6 @@ export default function Add() {
     // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
-    // TODO apply the filters values
     // TODO remember the last added data in the input
 
     async function handleSubmit(e) {
@@ -80,10 +79,8 @@ export default function Add() {
 
     let json = require('./Cities.json');
     const dropdownList = [];
-    let count = 1;
     json.Romania.cities.forEach(city => { 
-        dropdownList.push({ label: city, value: count }); 
-        count++;
+        dropdownList.push({ label: city, value: city }); 
     });
 
     return (
@@ -104,7 +101,8 @@ export default function Add() {
                             </div>
                             <div className="form-group row">                            
                                 <label className="col-sm-3 col-form-label"> Localitate </label>
-                                <Select className="col-sm-9" options={dropdownList}  {...bindOption('location')} placeholder = "Localitate"/>
+                                <Select isClearable className="col-sm-9" options={dropdownList}  placeholder = "Localitate"/>
+                                {/*  to add bind {...bindOption('location')} */}
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Telefon </label>
