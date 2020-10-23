@@ -98,7 +98,7 @@ export default function Add() {
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Localitate </label>
-                                <Dropdown id="ddlView" className="required" options = {dropdownList} {...bindOption('location')} placeholder = "Localitate" />
+                                {/* <Dropdown id="ddlView" className="required" options = {dropdownList} {...bindOption('location')} placeholder = "Localitate" /> */}
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Telefon </label>
