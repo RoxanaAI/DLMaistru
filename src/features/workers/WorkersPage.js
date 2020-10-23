@@ -74,6 +74,33 @@ function sortingWorkers(workers){
     return sortedWorkers;
 }
 
+function sortWorkersByDateAndTime(first, second) {       
+    if(null == first.date || null == second.date) {
+        return 1;
+    }
+    
+    if(first.date !== second.date) {
+        const dateDif = new Date(first.date) - new Date(second.date);
+        return dateDif > 0 ? -1: 1;
+    }
+
+    if(null == first.time || null == second.time) {
+        return 1;
+    }
+
+    var firstTime = first.time.split(":");
+    var secontTime = second.time.split(":");
+
+    const hourDif = firstTime[0] - secontTime[0];
+    const timeDif = firstTime[1] - secontTime[1]
+
+    if(hourDif !== 0){
+        return hourDif > 0 ? -1 : 1;
+    }else {
+        return timeDif > 0 ? -1 : 1;
+    }
+}
+
 function getDropDownData(workers) {
     const locations = new Set();
     const specializations = new Set();
