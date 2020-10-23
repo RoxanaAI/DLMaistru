@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { useForm } from '../../hooks';
 import { AuthContext } from '../auth/AuthContext';
 
-import Dropdown from 'react-dropdown';
+import Select from 'react-select';
 
 const initialFormValues = {value: ''};
 
@@ -78,7 +78,13 @@ export default function Add() {
         };
     }
 
-    const dropdownList = ["test", "test3"];
+    let json = require('./Cities.json');
+    const dropdownList = [];
+    let count = 1;
+    json.Romania.cities.forEach(city => { 
+        dropdownList.push({ label: city, value: count }); 
+        count++;
+    });
 
     return (
         <div>
@@ -96,9 +102,9 @@ export default function Add() {
                                 <label className="col-sm-3 col-form-label"> Specializare </label> 
                                 <input className="col-sm-9 form-control form-specialization" {...bindInput('specialization')} placeholder="Specializare"/>
                             </div>
-                            <div className="form-group row">
+                            <div className="form-group row">                            
                                 <label className="col-sm-3 col-form-label"> Localitate </label>
-                                {/* <Dropdown id="ddlView" className="required" options = {dropdownList} {...bindOption('location')} placeholder = "Localitate" /> */}
+                                <Select className="col-sm-9" options={dropdownList}  {...bindOption('location')} placeholder = "Localitate"/>
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3 col-form-label"> Telefon </label>
