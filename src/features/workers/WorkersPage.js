@@ -4,7 +4,7 @@ import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-export default function WorkersPage() {
+export default function WorkersPage( {firstItems} ) {
     const [workers, setItem] = useState([]);
     const [filterdWorkers, setFilteredItem] = useState(null);
     const db = firebase.firestore();
@@ -52,18 +52,26 @@ export default function WorkersPage() {
     }
 
     function resetFilter(){
-        setPrimaryExists(x=> x=!x);
- 
+        setPrimaryExists(x=> x=!x); 
     }
-   
-        return (
-            <>
-                <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
-                <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
-                <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
-                <WorkersList firstItems={false} workers={workers}></WorkersList>
-             </>
-        );
+  
+        if (firstItems) {
+            const displayWorkers = workers.slice(0,3);
+            return (
+                <>
+                    <WorkersList workers={displayWorkers}></WorkersList>
+                 </>
+            );
+        } else {
+            return (
+                <>
+                    <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                    <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                    <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
+                    <WorkersList workers={workers}></WorkersList>
+                 </>
+            );
+        }
     }
 
 function sortingWorkers(workers){
