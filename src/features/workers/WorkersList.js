@@ -9,7 +9,9 @@ export default function WorkersList( {workers}) {
     return (
         <>
             <dl>
+                <div className="workers">
                 { workers.map(item => <Worker key={item.workerid} worker={item} />) }
+                </div>
             </dl>
         </>
     );

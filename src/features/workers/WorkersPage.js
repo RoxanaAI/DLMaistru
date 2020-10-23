@@ -62,8 +62,7 @@ export default function WorkersPage() {
                 <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
                 <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
                 <WorkersList firstItems={false} workers={workers}></WorkersList>
-               
-            </>
+             </>
         );
     }
 

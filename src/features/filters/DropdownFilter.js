@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 export const DropdownFilter = ({ dropdownList, dropDownTitle, parentCallback, clearSelection}) => {
   const [currentSelection, setCurrentSelection] = useState("");
+
+  useEffect(() => {
+   setCurrentSelection(null);
+  }, [clearSelection])
   
   const changeSelection = (e) => {
     setCurrentSelection(e.value);
@@ -15,18 +19,8 @@ export const DropdownFilter = ({ dropdownList, dropDownTitle, parentCallback, cl
     if(null == first || null == second) {
         return -1;
     }
-    
-    return first.localeCompare(second)
+        return first.localeCompare(second)
   });
-  let i=1;
-// to be refactored
-  if(!clearSelection && currentSelection) {
-    i++;
-    console.log("in dropdownFilter "+ i)
-    setCurrentSelection(null);
-
-  }
-
 
   return (
                 <>
