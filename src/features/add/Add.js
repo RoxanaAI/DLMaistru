@@ -91,45 +91,41 @@ export default function Add() {
 
     return (
         <div>
-            {/* <div className="jumbotron jumbotron-fluid"> */}
-                <div className="container">
-                    
-                    <form onSubmit={handleSubmit} autoComplete="off">
-                        <h1 className="display-4">Maistru</h1>
-                        {/* <div className="form-group"> */}
-                            <div className="form-group row">
-                                <label className="col-sm-3 col-form-label"> Nume si prenume</label>
-                                <input className="col-sm-9 form-control form--name " {...bindInput('name')} placeholder="Nume si prenume"/>  
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-sm-3 col-form-label"> Specializare </label> 
-                                <input className="col-sm-9 form-control form-specialization" {...bindInput('specialization')} placeholder="Specializare"/>
-                            </div>
-                            <div className="form-group row">                            
-                                <label className="col-sm-3 col-form-label"> Localitate </label>
-                                <Select isClearable className="col-sm-9" options={dropdownList}  placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
-                                {/*  to add bind {...bindOption('location')} */}
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-sm-3 col-form-label"> Telefon </label>
-                                <input className="col-sm-9 form-control form-location" {...bindInput('phoneNumber')} placeholder="07123456789" type="tel"/>
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-sm-3 col-form-label"> Descriere</label> 
-                                <input className="col-sm-9 form-control form-description" {...bindInput('description')} placeholder="Descriere"/>
-                            </div>
-                        {/* </div> */}
-                        <button className="btn btn-primary" onClick={handleAdd}>Adaugare</button>
-                    </form>
+            <div className="container">         
 
-                    <Modal {...modalProps} >
+                <form onSubmit={handleSubmit} autoComplete="off"> 
+                    <h1 className="display-4">Maistru</h1>
                         <div className="form-group row">
-                            <label className=""> {validationMessage} </label>
+                            <label className="col-sm-3 col-form-label"> Nume si prenume</label>
+                            <input className="col-sm-9 form-control form--name " {...bindInput('name')} placeholder="Nume si prenume"/>  
                         </div>
-                    </Modal>
+                        <div className="form-group row">
+                            <label className="col-sm-3 col-form-label"> Specializare </label> 
+                            <input className="col-sm-9 form-control form-specialization" {...bindInput('specialization')} placeholder="Specializare"/>
+                        </div>
+                        <div className="form-group row">                            
+                            <label className="col-sm-3 col-form-label"> Localitate </label>
+                            <Select isClearable className="col-sm-9" options={dropdownList}  placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
+                            {/*  to add bind {...bindOption('location')} */}
+                        </div>
+                        <div className="form-group row">
+                            <label className="col-sm-3 col-form-label"> Telefon </label>
+                            <input className="col-sm-9 form-control form-location" {...bindInput('phoneNumber')} placeholder="07123456789" type="tel"/>
+                        </div>
+                        <div className="form-group row">
+                            <label className="col-sm-3 col-form-label"> Descriere</label> 
+                            <input className="col-sm-9 form-control form-description" {...bindInput('description')} placeholder="Descriere"/>
+                        </div>
+                    <button className="btn btn-primary" onClick={handleAdd}>Adaugare</button>
+                </form>
 
-                </div>
-            {/* </div> */}
+                <Modal {...modalProps} title="Adaugare maistru" >
+                    <div className="form-group row">
+                        <label className=""> {validationMessage} </label>
+                    </div>
+                </Modal>
+
+            </div>
         </div>
     )
 }

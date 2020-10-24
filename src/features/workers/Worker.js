@@ -11,38 +11,37 @@ export default function Worker({ worker }) {
 
     return (
         <div className="card" onClick={showDetails}>
-        <React.Fragment key={worker.id}>
-        <div className="card-header" >
-            <h2>{ worker.name }</h2>
-        </div>
-            <div className="card-body">
-                <div className="">
-                    <label className=""> Adaugat la: </label> {worker.time}  {worker.date}
+            <React.Fragment key={worker.id}>
+                <div className="card-header" >
+                    <h2>{ worker.name }</h2>
                 </div>
-                <div className="">
-                    <label className=""> Specializare: </label> {worker.specialization}
+                <div className="card-body">
+                    <div className="">
+                        <label className=""> Adaugat la: </label> {worker.time}  {worker.date}
+                    </div>
+                    <div className="">
+                        <label className=""> Specializare: </label> {worker.specialization}
+                    </div>
+                    <div className="">
+                        <label className=""> Localitate: </label> { worker.location }
+                    </div>
                 </div>
 
-                <div className="">
-                    <label className=""> Localitate: </label> { worker.location }
-                </div>
-            </div>
-
-            <Modal {...modalProps} >
-                        <div className="form-group row">
-                            <label className=""> Specializare: </label> {worker.specialization}
-                        </div>
-                        < div className="form-group row">
-                            <label className=""> Localitate: </label> {worker.location}
-                        </div>
-                        < div className="form-group row">
-                            <label className=""> Telefon: </label>  {worker.phoneNumber}
-                        </div>
-                        <div className="form-group row">
-                            <label className=""> Descriere: </label> { worker.description }
-                        </div>
-                    </Modal>
-        </React.Fragment>
+                <Modal {...modalProps} title={ worker.name } >
+                    <div className="form-group row">
+                        <label className=""> Specializare: </label> {worker.specialization}
+                    </div>
+                    < div className="form-group row">
+                        <label className=""> Localitate: </label> {worker.location}
+                    </div>
+                    < div className="form-group row">
+                        <label className=""> Telefon: </label>  {worker.phoneNumber}
+                    </div>
+                    <div className="form-group row">
+                        <label className=""> Descriere: </label> { worker.description }
+                    </div>
+                </Modal>
+            </React.Fragment>
         </div>
     );
 }

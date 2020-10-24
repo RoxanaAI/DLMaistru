@@ -23,19 +23,22 @@ import React, { useState, useEffect } from 'react'
 
     return (
         <>
-        <div className={`modal fade${open ? ' show' : ''}`} style={ {display: showBackdrop ? 'block' : 'none'} } id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered" role="document">
-                <div className="modal-content">
-                    <div className="modal-body"> 
-                        <button type="button" className="close" onClick={handleDismiss} aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {children}
+            <div className={`modal fade${open ? ' show' : ''}`} style={ {display: showBackdrop ? 'block' : 'none'} } id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLongTitle">{title}</h5>
+                            <button type="button" className="close" onClick={handleDismiss} aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body"> 
+                            {children}
+                        </div>
+                    </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div className={`modal-backdrop fade${open ? ' show' : ''}`} style={ {display: showBackdrop ? 'block' : 'none' }}></div>
+            <div className={`modal-backdrop fade${open ? ' show' : ''}`} style={ {display: showBackdrop ? 'block' : 'none' }}></div>
         </>
     );
 }
