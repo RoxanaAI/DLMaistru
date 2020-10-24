@@ -39,46 +39,52 @@ export default function Add() {
     // function goTo() {
     //      return <Redirect to='/' />
     // }
-    // TODO add hand cursor for the cards
+    // TODO redirect
+    // TODO the second time the detials are not appearing
     // TODO align better the form, the design for maistri and adaugare maistru
-    // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
-    // TODO remember input login user input
-    // TODO remember the last added data in the input
-    // TODO the modal is not appearing anymore at the second click
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        try {
-            const time = new Date().getHours() + ":" +  new Date().getMinutes();
-            const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-            const workerId = user.uid + Math.random() + date + time;
-            
-            await db.collection("workersCollection").add({   
-                user: user.uid,
-                workerid:  workerId,
-                name: values.name,
-                specialization: values.specialization,
-                location: values.location,
-                phoneNumber: values.phoneNumber,
-                description: values.description,
-                date: date,
-                time: time,
-            })
-            .then(() => alert('Your profile has been created, '+ values.name))
-            .then(() => [] )
-            .then(() => {return <Redirect to='/' />})
-                              
-        } catch(error) {
-            console.warn("Error adding worker: ", error);
-        };
+        let validation = dataIsValid(values);
+        if(validation[0]) {
+          
+            try {
+                const time = new Date().getHours() + ":" +  new Date().getMinutes();
+                const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+                const workerId = user.uid + Math.random() + date + time;
+                
+                await db.collection("workersCollection").add({   
+                    user: user.uid,
+                    workerid:  workerId,
+                    name: values.name,
+                    specialization: values.specialization,
+                    location: values.location,
+                    phoneNumber: values.phoneNumber,
+                    description: values.description,
+                    date: date,
+                    time: time,
+                })
+                .then(() => { showAddedWorked() } )
+                .then(() => [] )
+                .then(() => {return <Redirect to='/' />})
+                                
+            } catch(error) {
+                console.warn("Error adding worker: ", error);
+            };
+        }        
+    }
+
+    function showAddedWorked(){
+        setValidationMessage('Adaugarea a fost realizata cu succes.');
+        openModal();
     }
     
     function handleAdd(){
-        const validationMessage = dataIsValid(values);
-        if(validationMessage) {
-            setValidationMessage(validationMessage);
+        let validation = dataIsValid(values);
+        if(!validation[0]) {
+            setValidationMessage(validation[1]);
             openModal();
         }
     }
@@ -154,23 +160,26 @@ export default function Add() {
 }
 
 function dataIsValid(values) {
+    if(values === null || values === undefined) {
+        return [false, "Va rugam completati campurile libere."];
+    }        
     if(values.name === undefined || values.name === null || values.name.length < 3) {
-        return "Va rugam adaugati un nume si prenume valid."
+        return [false, "Va rugam adaugati un nume si prenume valid."];
     }
     if(values.specialization === undefined || values.specialization === null || values.specialization === "") {
-        return "Va rugam adaugati o specializare valida."
+        return [false, "Va rugam adaugati o specializare valida."];
     }
     if(values.location === undefined || values.location === null || values.location === "") {
-        return "Localitatea trebuie sa fie selectata."
+        return [false,  "Localitatea trebuie sa fie selectata."];
     }
     if(values.phoneNumber === undefined || values.phoneNumber === null || !checkPhoneNumber(values.phoneNumber)) {
-        return "Va rugam adaugati un numar de telefon valid."
+        return [false, "Va rugam adaugati un numar de telefon valid."];
     }
     if(values.description === undefined || values.description === null || values.description.length < 10) {
-        return "Va rugam adaugati o descriere mai complexa."
+        return [false, "Va rugam adaugati o descriere mai complexa. Minimum 10 caractere."];
     }
 
-    return null;
+    return [true, ""];
 }
 
 function checkPhoneNumber(val) {

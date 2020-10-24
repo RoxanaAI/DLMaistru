@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import  Home  from './features/auth/Home';
-import  Login  from './features/auth/Login';
+import  LoginRegister  from './features/auth/LoginRegister';
 import  Logout  from './features/auth/Logout';
 
 import  Navbar  from './components/Navbar';
@@ -21,7 +21,8 @@ function App() {
             <Switch>
                 <Route exact path="/workers" component={WorkersPage} />
                 <Route exact path="/add" component={Add} />
-                <Route exact path="/login" component={Login} />
+                <Route exact path="/login" component={LoginRegister} />
+                <Route exact path="/register" component={LoginRegister} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/" component={Home} />
                 <Route component={() => <h1>404</h1>} />

@@ -7,8 +7,8 @@ import 'firebase/storage';
 export default function WorkersPage( {firstItems} ) {
    const [workers, setItem] = useState([]);
    const [primaryExists, setPrimaryExists] = useState(true);
-   const [locatization, setLocalization] = useState('');
-   const [specialization, setSpecialization] = useState('');
+   const [, setLocalization] = useState('');
+   const [, setSpecialization] = useState('');
 
    const db = firebase.firestore();
    useEffect( () => {
