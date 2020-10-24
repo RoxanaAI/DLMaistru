@@ -45,10 +45,11 @@ export default function Add() {
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO remember the last added data in the input
+    // TODO the modal is not appearing anymore at the second click
 
     async function handleSubmit(e) {
         e.preventDefault();
-          
+
         try {
             const time = new Date().getHours() + ":" +  new Date().getMinutes();
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
