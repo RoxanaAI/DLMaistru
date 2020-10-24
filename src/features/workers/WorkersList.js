@@ -1,7 +1,7 @@
 import React from 'react'
 import Worker from './Worker';
 
-export default function WorkersList( {workers}) {  
+export default function WorkersList( {workers, dismissModal}) {  
     if(!workers) {
         return <h1>Nu au fost adaugati maistri ...</h1>;
     }
@@ -10,7 +10,7 @@ export default function WorkersList( {workers}) {
         <>
             <dl>
                 <div className="workers">
-                { workers.map(item => <Worker key={item.workerid} worker={item} />) }
+                { workers.map(item => <Worker key={item.workerid} worker={item} dismissModal={dismissModal} />) }
                 </div>
             </dl>
         </>

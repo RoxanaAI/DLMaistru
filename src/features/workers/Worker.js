@@ -2,11 +2,13 @@ import React from 'react'
 import { Modal } from '../../components/Modal/Modal.js';
 import { useModal } from '../../components/Modal/useModal.js';
 
-export default function Worker({ worker }) {
+export default function Worker({ worker, dismissModal }) {
     const { modalProps, openModal } = useModal();
     
     function showDetails(){
-        openModal();
+        if(!dismissModal) {
+            openModal();
+        }
     }
 
     return (

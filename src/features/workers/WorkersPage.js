@@ -41,7 +41,7 @@ export default function WorkersPage( {firstItems} ) {
         return (
             <>
                 <h2>Cele mai recente anunturi</h2>  
-                <WorkersList workers={displayWorkers}></WorkersList>
+                <WorkersList workers={displayWorkers} dismissModal={true}></WorkersList>
             </>
         );
     } else {
@@ -67,7 +67,7 @@ export default function WorkersPage( {firstItems} ) {
                <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
                <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
                <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
-               <WorkersList workers={workers}></WorkersList>
+               <WorkersList workers={workers} dismissModal={false}></WorkersList>
             </>
         );
     }
