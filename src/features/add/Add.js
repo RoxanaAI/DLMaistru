@@ -39,7 +39,6 @@ export default function Add() {
     // function goTo() {
     //      return <Redirect to='/' />
     // }
-    // TODO add hand cursor for the cards
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID

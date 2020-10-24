@@ -9,8 +9,10 @@ export default function Worker({ worker }) {
         openModal();
     }
 
+    let linkStyle = {cursor: 'pointer'};
+
     return (
-        <div className="card" onClick={showDetails}>
+        <div className="card" onClick={showDetails} style={linkStyle}>
             <React.Fragment key={worker.id}>
                 <div className="card-header" >
                     <h2>{ worker.name }</h2>
