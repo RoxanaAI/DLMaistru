@@ -36,6 +36,7 @@ export default function WorkersPage( {firstItems} ) {
         const displayWorkers = workers.length < firstItemsCount ? workers : workers.slice(0,firstItemsCount);
         return (
             <>
+                <h2>Cele mai recente anunturi</h2>  
                 <WorkersList workers={displayWorkers}></WorkersList>
             </>
         );
