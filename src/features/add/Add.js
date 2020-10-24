@@ -107,7 +107,7 @@ export default function Add() {
                             </div>
                             <div className="form-group row">                            
                                 <label className="col-sm-3 col-form-label"> Localitate </label>
-                                <Select isClearable className="col-sm-9" options={dropdownList}  placeholder = "Localitate"/>
+                                <Select isClearable className="col-sm-9" options={dropdownList}  placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
                                 {/*  to add bind {...bindOption('location')} */}
                             </div>
                             <div className="form-group row">
