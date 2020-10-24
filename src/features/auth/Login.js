@@ -13,7 +13,7 @@ export default function Login(){
     function handleSubmit(event){
          event.preventDefault();
         auth().signInWithEmailAndPassword(values.email,values.password)
-        .then(alert('Succesfully loged in'))
+        .then(console.log('Succesfully loged in'))
         .catch(function(error) {
             // Handle Errors here.
             var errorMessage = error.message;
