@@ -12,7 +12,7 @@ export default function Worker({ worker, dismissModal, showDelete = false }) {
     }
 
     function handleDelete() {
-        
+
     }
 
     return (
@@ -32,7 +32,9 @@ export default function Worker({ worker, dismissModal, showDelete = false }) {
                         <label className=""> Localitate: </label> { worker.location }
                     </div>
                 </div>
-                <button className="btn btn-primary" onClick={showDetails}>Details</button> 
+                { dismissModal ?
+                    null : <button className="btn btn-primary" onClick={showDetails}>Details</button> 
+                }
                 { showDelete ?
                     <button className="btn btn-primary" onClick={handleDelete}>Delete</button> : null
                 }
