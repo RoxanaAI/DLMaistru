@@ -49,7 +49,7 @@ export default function Add() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-       
+          
         try {
             const time = new Date().getHours() + ":" +  new Date().getMinutes();
             const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
@@ -74,13 +74,22 @@ export default function Add() {
             console.warn("Error adding worker: ", error);
         };
     }
-
+    
     function handleAdd(){
         const validationMessage = dataIsValid(values);
         if(validationMessage) {
             setValidationMessage(validationMessage);
             openModal();
         }
+    }
+
+    function locationChange(event){
+        if(event == null || event === undefined || !event.value){
+            values.location = "";
+            return;
+        }
+
+        values.location = event.value;
     }
 
     let json = require('./Cities.json');
@@ -105,8 +114,7 @@ export default function Add() {
                         </div>
                         <div className="form-group row">                            
                             <label className="col-sm-3 col-form-label"> Localitate </label>
-                            <Select isClearable className="col-sm-9" options={dropdownList}  placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
-                            {/*  to add bind {...bindOption('location')} */}
+                            <Select isClearable className="col-sm-9" options={dropdownList} onChange={locationChange} placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-3 col-form-label"> Telefon </label>
@@ -137,9 +145,9 @@ function dataIsValid(values) {
     if(values.specialization === undefined || values.specialization === null || values.specialization.length < 3) {
         return "Va rugam adaugati o specializare valida."
     }
-    // if(values.location === undefined || values.location === null) {
-    //     return "Localitatea trebuie sa fie selectata."
-    // }
+    if(values.location === undefined || values.location === null || values.location === "") {
+        return "Localitatea trebuie sa fie selectata."
+    }
     if(values.phoneNumber === undefined || values.phoneNumber === null || !checkPhoneNumber(values.phoneNumber)) {
         return "Va rugam adaugati un numar de telefon valid."
     }
