@@ -27,7 +27,7 @@ export default function Navbar() {
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <SrNavLink className="nav-link" to="/workers">Maistri</SrNavLink>
+                        <SrNavLink className="nav-link" to="/workers">Anunturile</SrNavLink>
                     </li>
                
                     <li className="nav-item">
@@ -38,7 +38,7 @@ export default function Navbar() {
 
                     <li className="nav-item">
                     { isAuthenticated ?
-                        <SrNavLink className="nav-link" to="/add">Adaugare maistru</SrNavLink> : null
+                        <SrNavLink className="nav-link" to="/add">Adaugare anunt</SrNavLink> : null
                     }
                     </li>
                               
