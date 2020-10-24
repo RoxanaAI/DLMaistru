@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal } from '../../components/Modal/Modal.js';
 import { useModal } from '../../components/Modal/useModal.js';
+import * as firebase from 'firebase/app';
 
 export default function Worker({ worker, dismissModal, showDelete = false }) {
     const { modalProps, openModal } = useModal();
+    const db = firebase.database();
     
     function showDetails(){
         if(!dismissModal) {
@@ -12,7 +14,9 @@ export default function Worker({ worker, dismissModal, showDelete = false }) {
     }
 
     function handleDelete() {
-
+        console.log("need to delete the element");
+        // console.log(db);
+        // firebase.database().ref('workersCollection').child('ITEM_KEY').remove();
     }
 
     return (
