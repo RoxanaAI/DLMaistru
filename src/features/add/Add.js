@@ -15,7 +15,7 @@ const initialFormValues = {value: ''};
 export default function Add() {
     const [ , setItem ] = useState(initialFormValues);
     const [ validationMessage, setValidationMessage ] = useState("");
-    const { values, bindInput, bindOption } = useForm(initialFormValues);
+    const { values, bindInput } = useForm(initialFormValues);
     const { modalProps, openModal } = useModal();
     const { user } = useContext(AuthContext);
 
@@ -45,7 +45,6 @@ export default function Add() {
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO remember the last added data in the input
-    // TODO bind location
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -83,19 +82,34 @@ export default function Add() {
         }
     }
 
+    function specializationChange(event){
+        if(event == null || event === undefined || !event.value){
+            values.specialization = "";
+        } else {
+            values.specialization = event.value;
+        }
+    }
+
     function locationChange(event){
         if(event == null || event === undefined || !event.value){
             values.location = "";
-            return;
+        } else {
+            values.location = event.value;
         }
-
-        values.location = event.value;
     }
 
-    let json = require('./Cities.json');
-    const dropdownList = [];
+    let json = require('./Specializations.json');
+    const specializations = [];
+    json.constructions.forEach(specialization => { 
+        specializations.push({ label: specialization, value: specialization }); 
+        specializations.sort( (first, second) => first.value >second.value ? 1 : -1 );
+    });
+
+    json = require('./Cities.json');
+    const localizations = [];
     json.Romania.cities.forEach(city => { 
-        dropdownList.push({ label: city, value: city }); 
+        localizations.push({ label: city, value: city }); 
+        localizations.sort( (first, second) => first.value >second.value ? 1 : -1 );
     });
 
     return (
@@ -109,12 +123,12 @@ export default function Add() {
                             <input className="col-sm-9 form-control form--name " {...bindInput('name')} placeholder="Nume si prenume"/>  
                         </div>
                         <div className="form-group row">
-                            <label className="col-sm-3 col-form-label"> Specializare </label> 
-                            <input className="col-sm-9 form-control form-specialization" {...bindInput('specialization')} placeholder="Specializare"/>
+                            <label className="col-sm-3 col-form-label"> Specializare </label>
+                            <Select isClearable className="col-sm-9" options={specializations} onChange={specializationChange} placeholder = "Specializare" noOptionsMessage={()=> "Cautare..."} />
                         </div>
                         <div className="form-group row">                            
                             <label className="col-sm-3 col-form-label"> Localitate </label>
-                            <Select isClearable className="col-sm-9" options={dropdownList} onChange={locationChange} placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
+                            <Select isClearable className="col-sm-9" options={localizations} onChange={locationChange} placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
                         </div>
                         <div className="form-group row">
                             <label className="col-sm-3 col-form-label"> Telefon </label>
@@ -142,7 +156,7 @@ function dataIsValid(values) {
     if(values.name === undefined || values.name === null || values.name.length < 3) {
         return "Va rugam adaugati un nume si prenume valid."
     }
-    if(values.specialization === undefined || values.specialization === null || values.specialization.length < 3) {
+    if(values.specialization === undefined || values.specialization === null || values.specialization === "") {
         return "Va rugam adaugati o specializare valida."
     }
     if(values.location === undefined || values.location === null || values.location === "") {
