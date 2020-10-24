@@ -30,8 +30,9 @@ export default function LoginRegister(){
                 }
             }
         } catch(e) {
-            var errorMessage = e.message;
-            alert(errorMessage);
+            console.log(e.errorMessage);
+            setMessage("Conectarea nu s-a putut realiza.");
+            openModal();
         }
     }
 
