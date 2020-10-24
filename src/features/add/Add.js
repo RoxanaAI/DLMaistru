@@ -46,6 +46,7 @@ export default function Add() {
     // TODO need to clear the database because now we have workers with the same ID
     // TODO remember input login user input
     // TODO remember the last added data in the input
+    // TODO bind location
 
     async function handleSubmit(e) {
         e.preventDefault();
