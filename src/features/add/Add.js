@@ -160,6 +160,9 @@ export default function Add() {
 }
 
 function dataIsValid(values) {
+    if(values === null || values === undefined) {
+        return [false, "Va rugam completati campurile libere."];
+    }        
     if(values.name === undefined || values.name === null || values.name.length < 3) {
         return [false, "Va rugam adaugati un nume si prenume valid."];
     }

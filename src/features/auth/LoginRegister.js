@@ -1,8 +1,10 @@
 import { auth } from 'firebase';
-import React , { useContext } from 'react';
+import React , { useContext, useState } from 'react';
 import  useForm  from '../../hooks/useForm';
 import { AuthContext } from './AuthContext';
 import { Redirect, useLocation } from 'react-router-dom';
+import { Modal } from '../../components/Modal/Modal.js';
+import { useModal } from '../../components/Modal/useModal.js';
 
 
 export default function LoginRegister(){
@@ -10,6 +12,8 @@ export default function LoginRegister(){
     const { isAuthenticated } = useContext(AuthContext);
     const { pathname } = useLocation();
     const isRegister = (pathname === '/register');
+    const { modalProps, openModal } = useModal();
+    const [ message, setMessage ] = useState("");
   
     async function handleSubmit(e) {
         e.preventDefault();
@@ -21,7 +25,8 @@ export default function LoginRegister(){
                 if(values && values.password === values.retype_password) {
                     await auth().createUserWithEmailAndPassword(values.email, values.password);  
                 } else {
-                    alert('The two passwords must match!');
+                    setMessage("Parolele trebuie sa fie identice.");
+                    openModal();
                 }
             }
         } catch(e) {
@@ -53,11 +58,16 @@ export default function LoginRegister(){
                             <input type='password' name="password" id="retype_password" {...bindInput('retype_password')} className="form-control" placeholder="Rescriere parola" required/>
                         </p>
                     )}
-                    <button type="submit" className="btn btn-primary"> { !isRegister ? 'Connectare' : 'Inregistrare' }</button>
+                    <button type="submit" className="btn btn-primary" > { !isRegister ? 'Connectare' : 'Inregistrare' }</button>
                 </form>
+
+                <Modal {...modalProps} title="Inregistrare" >
+                    <div className="form-group row">
+                        <label className=""> {message} </label>
+                    </div>
+                </Modal>
             </div>
         </>
     )
 
 }
-
