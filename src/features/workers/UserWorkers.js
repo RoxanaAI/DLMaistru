@@ -7,7 +7,7 @@ export default function UserWorkers(){
 
     return(
         <>
-            <WorkersPage firstItems={false} filtersActive={false} user={user}></WorkersPage>
+            <WorkersPage firstItems={false} filtersActive={false} user={user} showDelete={true}></WorkersPage>
         </>
     )
 }

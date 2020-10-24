@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal } from '../../components/Modal/Modal.js';
 import { useModal } from '../../components/Modal/useModal.js';
 
-export default function Worker({ worker, dismissModal }) {
+export default function Worker({ worker, dismissModal, showDelete = false }) {
     const { modalProps, openModal } = useModal();
     
     function showDetails(){
@@ -11,12 +11,14 @@ export default function Worker({ worker, dismissModal }) {
         }
     }
 
-    let linkStyle = dismissModal ? {} : {cursor: 'pointer'};
+    function handleDelete() {
+        
+    }
 
     return (
-        <div className="card" onClick={showDetails} style={linkStyle}>
-            <React.Fragment key={worker.id}>
-                <div className="card-header" >
+        <div className="card">
+            <React.Fragment key={worker.id} >
+                <div className="card-header"> 
                     <h2>{ worker.name }</h2>
                 </div>
                 <div className="card-body">
@@ -30,6 +32,10 @@ export default function Worker({ worker, dismissModal }) {
                         <label className=""> Localitate: </label> { worker.location }
                     </div>
                 </div>
+                <button className="btn btn-primary" onClick={showDetails}>Details</button> 
+                { showDelete ?
+                    <button className="btn btn-primary" onClick={handleDelete}>Delete</button> : null
+                }
 
                 <Modal {...modalProps} title={ worker.name } >
                     <div className="form-group row">
