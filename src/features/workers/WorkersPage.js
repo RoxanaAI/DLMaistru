@@ -26,9 +26,13 @@ export default function WorkersPage( {firstItems} ) {
         }   
         fetchData();
     }, [db, primaryExists]);
-   
+
     if(!workers) {
-        return <h1>Nu au fost adaugati maistri ...</h1>;
+        return ( 
+            <>
+                <h1>Nu au fost adaugati maistri ...</h1>
+            </>
+        );
     }
   
     if (firstItems) {
@@ -69,11 +73,6 @@ export default function WorkersPage( {firstItems} ) {
     }
 }
 
-// function sortingWorkers(workers){
-//     const sortedWorkers= workers.slice().sort((a,b) => new Date(a.date) - new Date(b.date));
-//     sortedWorkers.reverse();
-//     return sortedWorkers;
-// }
 
 function sortWorkersByDateAndTime(first, second) {       
     if(null == first.date || null == second.date) {

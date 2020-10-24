@@ -14,9 +14,9 @@ const initialFormValues = {value: ''};
 
 export default function Add() {
     const [ , setItem ] = useState(initialFormValues);
-    const [validationMessage, setValidationMessage ] = useState("");
+    const [ validationMessage, setValidationMessage ] = useState("");
     const { values, bindInput, bindOption } = useForm(initialFormValues);
-    const {modalProps, openModal} = useModal();
+    const { modalProps, openModal } = useModal();
     const { user } = useContext(AuthContext);
 
     const db = firebase.firestore();
@@ -39,7 +39,7 @@ export default function Add() {
     // function goTo() {
     //      return <Redirect to='/' />
     // }
-    
+    // TODO add hand cursor for the cards
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
