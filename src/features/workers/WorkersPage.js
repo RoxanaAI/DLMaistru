@@ -4,7 +4,7 @@ import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-export default function WorkersPage( {firstItems} ) {
+export default function WorkersPage( {firstItems, filtersActive = true, user = null} ) {
    const [workers, setItem] = useState([]);
    const [primaryExists, setPrimaryExists] = useState(true);
    const [, setLocalization] = useState('');
@@ -12,20 +12,39 @@ export default function WorkersPage( {firstItems} ) {
 
    const db = firebase.firestore();
    useEffect( () => {
-        async function fetchData(){
-            await db.collection("workersCollection")
-                .onSnapshot((docs) => {
-                    const workers = [];
-                    docs.forEach((doc) => {
-                        const worker = {...doc.data(), id: doc.workerid}
-                        workers.push(worker);
-                    });
-                const sortedWorkers = workers.sort((first, second) => sortWorkersByDateAndTime(first, second));
-                setItem(sortedWorkers);
-            }); 
-        }   
-        fetchData();
+        if(user) {             
+            fetchDataWithUser();
+        } else {
+            fetchData();
+        }
     }, [db, primaryExists]);
+
+    async function fetchData(){
+        await db.collection("workersCollection")
+            .onSnapshot((docs) => {
+                const workers = [];
+                docs.forEach((doc) => {
+                    const worker = {...doc.data(), id: doc.workerid}
+                    workers.push(worker);
+                });
+            const sortedWorkers = workers.sort((first, second) => sortWorkersByDateAndTime(first, second));
+            setItem(sortedWorkers);
+        }); 
+    }
+
+    async function fetchDataWithUser(){
+        await db.collection("workersCollection")
+            .where("user", "==", user.uid)
+            .onSnapshot((docs) => {
+                const workers = [];
+                docs.forEach((doc) => {
+                    const worker = {...doc.data(), id: doc.workerid}
+                    workers.push(worker);
+                });
+            const sortedWorkers = workers.sort((first, second) => sortWorkersByDateAndTime(first, second));
+            setItem(sortedWorkers);
+        }); 
+    }
 
     if(!workers) {
         return ( 
@@ -62,14 +81,23 @@ export default function WorkersPage( {firstItems} ) {
         }
 
         const dropDownData = getDropDownData(workers);
-        return (
-            <>
-               <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
-               <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
-               <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
-               <WorkersList workers={workers} dismissModal={false}></WorkersList>
-            </>
-        );
+
+        if (filtersActive){
+            return (
+                <>
+                   <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                   <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                   <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
+                   <WorkersList workers={workers} dismissModal={false}></WorkersList>
+                </>
+            );
+        } else {
+            return (
+                <>
+                   <WorkersList workers={workers} dismissModal={false}></WorkersList>
+                </>
+            );
+        }
     }
 }
 

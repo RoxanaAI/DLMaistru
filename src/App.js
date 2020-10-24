@@ -8,8 +8,9 @@ import  Logout  from './features/auth/Logout';
 
 import  Navbar  from './components/Navbar';
 import  WorkersPage  from './features/workers/WorkersPage';
-import Add from './features/add/Add';
 import { AuthContextProvider } from './features/auth/AuthContext';
+import UserWorkers from './features/workers/UserWorkers';
+import Add from './features/add/Add';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
             <Switch>
                 <Route exact path="/workers" component={WorkersPage} />
                 <Route exact path="/add" component={Add} />
+                <Route exact path="/userworkers" component={UserWorkers} />
                 <Route exact path="/login" component={LoginRegister} />
                 <Route exact path="/register" component={LoginRegister} />
                 <Route exact path="/logout" component={Logout} />

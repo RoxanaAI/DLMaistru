@@ -29,7 +29,13 @@ export default function Navbar() {
                     <li className="nav-item">
                         <SrNavLink className="nav-link" to="/workers">Maistri</SrNavLink>
                     </li>
-                
+               
+                    <li className="nav-item">
+                    { isAuthenticated ?
+                        <SrNavLink className="nav-link" to="/userworkers">Anunturile mele</SrNavLink> : null
+                    }
+                    </li>
+
                     <li className="nav-item">
                     { isAuthenticated ?
                         <SrNavLink className="nav-link" to="/add">Adaugare maistru</SrNavLink> : null
