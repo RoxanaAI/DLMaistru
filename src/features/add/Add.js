@@ -39,11 +39,10 @@ export default function Add() {
     // function goTo() {
     //      return <Redirect to='/' />
     // }
+    // TODO redirect
+    // TODO the second time the detials are not appearing
     // TODO align better the form, the design for maistri and adaugare maistru
-    // TODO Adaugare maistru to be available only if login
     // TODO need to clear the database because now we have workers with the same ID
-    // TODO remember input login user input
-    // TODO remember the last added data in the input
 
     async function handleSubmit(e) {
         e.preventDefault();
