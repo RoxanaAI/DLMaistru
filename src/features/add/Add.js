@@ -3,12 +3,11 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { Redirect } from 'react-router-dom';
-import { Modal } from 'F:/Roxana/IT/cursuri/DlMaistru/src/components/Modal/Modal.js';
-import { useModal } from 'F:/Roxana/IT/cursuri/DlMaistru/src/components/Modal/useModal.js';
+import { Modal } from '../../components/Modal/Modal.js';
+import { useModal } from '../../components/Modal/useModal.js';
 
 import { useForm } from '../../hooks';
 import { AuthContext } from '../auth/AuthContext';
-
 import Select from 'react-select';
 
 const initialFormValues = {value: ''};
