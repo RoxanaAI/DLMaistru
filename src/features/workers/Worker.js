@@ -11,7 +11,7 @@ export default function Worker({ worker, dismissModal }) {
         }
     }
 
-    let linkStyle = {cursor: 'pointer'};
+    let linkStyle = dismissModal ? {} : {cursor: 'pointer'};
 
     return (
         <div className="card" onClick={showDetails} style={linkStyle}>
