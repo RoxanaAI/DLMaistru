@@ -5,7 +5,6 @@ import * as firebase from 'firebase/app';
 
 export default function Worker({ worker, dismissModal, showDelete = false }) {
     const { modalProps, openModal } = useModal();
-    const db = firebase.database();
     
     function showDetails(){
         if(!dismissModal) {
@@ -13,11 +12,19 @@ export default function Worker({ worker, dismissModal, showDelete = false }) {
         }
     }
 
-    function handleDelete() {
-        console.log("need to delete the element");
-        // console.log(db);
-        // firebase.database().ref('workersCollection').child('ITEM_KEY').remove();
-    }
+   async function handleDelete() {
+
+      await firebase.firestore().collection('workersCollection').onSnapshot(documents => {
+          documents.forEach(document =>{ 
+              console.log(document.data().workerid)
+              if(document.data().workerid === worker.workerid){
+                  firebase.firestore().collection('workersCollection').doc(document.id).delete();
+                alert('Anuntul a fost sters cu success!')
+           }
+        })
+    
+       });
+      }
 
     return (
         <div className="card">
