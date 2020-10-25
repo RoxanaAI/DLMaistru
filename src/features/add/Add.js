@@ -72,14 +72,20 @@ export default function Add() {
         }        
     }
 
-  
-
-
     function showAddedWorked(){
+        resetValue();
         setValidationMessage('Adaugarea a fost realizata cu succes.');
         openModal();
     }
-    
+
+    function resetValue() {
+        values.name = "";
+        values.specialization = "";
+        values.location = "";
+        values.phoneNumber = "";
+        values.description = "";
+    }
+
     function handleAdd(){
         let validation = dataIsValid(values);
         if(!validation[0]) {
