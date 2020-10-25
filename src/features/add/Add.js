@@ -21,8 +21,9 @@ export default function Add() {
 
     const db = firebase.firestore();
     useEffect(() => {
+        let subscribe =null;
         if(user) {
-            db.collection("workersCollection")
+          subscribe = db.collection("workersCollection")
                 .where("user", "==", user.uid)
                 .onSnapshot((docs) => {
                     const newWorkers = [];
@@ -33,7 +34,7 @@ export default function Add() {
                     setItem(newWorkers);
                 });   
         }  
-
+        return () => subscribe(); //Unsubscribe
     }, [db, user]);
 
     // function goTo() {
@@ -43,6 +44,8 @@ export default function Add() {
     // TODO the second time the detials are not appearing
     // TODO align better the form, the design for maistri and adaugare maistru
     // TODO need to clear the database because now we have workers with the same ID
+
+    
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -75,6 +78,9 @@ export default function Add() {
             };
         }        
     }
+
+  
+
 
     function showAddedWorked(){
         setValidationMessage('Adaugarea a fost realizata cu succes.');
