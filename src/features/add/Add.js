@@ -21,9 +21,9 @@ export default function Add() {
 
     const db = firebase.firestore();
     useEffect(() => {
-        let subscribe =null;
+        let subscribe = null;
         if(user) {
-          subscribe = db.collection("workersCollection")
+            subscribe = db.collection("workersCollection")
                 .where("user", "==", user.uid)
                 .onSnapshot((docs) => {
                     const newWorkers = [];
@@ -34,7 +34,7 @@ export default function Add() {
                     setItem(newWorkers);
                 });   
         }  
-        return () => subscribe(); //Unsubscribe
+        return () => subscribe; //Unsubscribe
     }, [db, user]);
 
     // function goTo() {
@@ -46,7 +46,6 @@ export default function Add() {
 
         let validation = dataIsValid(values);
         if(validation[0]) {
-          
             try {
                 const time = new Date().getHours() + ":" +  new Date().getMinutes();
                 const date = new Date().toJSON().slice(0,10).replace(/-/g,'/');
@@ -122,34 +121,33 @@ export default function Add() {
     return (
         <div>
             <div className="container">         
-
-                <form onSubmit={handleSubmit} autoComplete="off"> 
-                    <h1 className="display-4">Maistru</h1>
-                        <div className="form-group row">
-                            <label className="col-sm-3 col-form-label"> Nume si prenume</label>
-                            <input className="col-sm-9 form-control form--name " {...bindInput('name')} placeholder="Nume si prenume"/>  
+            <h1 className="display-4">Maistru</h1>
+                <form onSubmit={handleSubmit} autoComplete="off" > 
+                        <div className="form-group">
+                            <label className="form-label"> Nume si prenume</label>
+                            <input className="form-control form-nume" {...bindInput('name')} placeholder="Nume si prenume"/>  
                         </div>
-                        <div className="form-group row">
-                            <label className="col-sm-3 col-form-label"> Specializare </label>
-                            <Select isClearable className="col-sm-9" options={specializations} onChange={specializationChange} placeholder = "Specializare" noOptionsMessage={()=> "Cautare..."} />
+                        <div className="form-group">
+                            <label className="form-label"> Specializare </label>
+                            <Select isClearable className="form-specializare" options={specializations} onChange={specializationChange} placeholder = "Specializare" noOptionsMessage={()=> "Cautare..."} />
                         </div>
-                        <div className="form-group row">                            
-                            <label className="col-sm-3 col-form-label"> Localitate </label>
-                            <Select isClearable className="col-sm-9" options={localizations} onChange={locationChange} placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
+                        <div className="form-group">                            
+                            <label className="form-label"> Localitate </label>
+                            <Select isClearable className="form-localitate" options={localizations} onChange={locationChange} placeholder = "Localitate" noOptionsMessage={()=> "Cautare..."} />
                         </div>
-                        <div className="form-group row">
-                            <label className="col-sm-3 col-form-label"> Telefon </label>
-                            <input className="col-sm-9 form-control form-location" {...bindInput('phoneNumber')} placeholder="07123456789" type="tel"/>
+                        <div className="form-group">
+                            <label className="form-label"> Telefon </label>
+                            <input className="form-control form-telefon" {...bindInput('phoneNumber')} placeholder="07123456789" type="tel"/>
                         </div>
-                        <div className="form-group row">
-                            <label className="col-sm-3 col-form-label"> Descriere</label> 
-                            <input className="col-sm-9 form-control form-description" {...bindInput('description')} placeholder="Descriere"/>
+                        <div className="form-group">
+                            <label className="form-label"> Descriere</label> 
+                            <textarea className="form-control form-description" {...bindInput('description')} placeholder="Descriere" rows="5"> </textarea>
                         </div>
-                    <button className="btn btn-primary" onClick={handleAdd}>Adaugare</button>
+                    <button className="btn btn-primary add-btn" onClick={handleAdd}>Adaugare</button>
                 </form>
 
                 <Modal {...modalProps} title="Adaugare maistru" >
-                    <div className="form-group row">
+                    <div className="form-group">
                         <label className=""> {validationMessage} </label>
                     </div>
                 </Modal>
@@ -193,3 +191,4 @@ function checkPhoneNumber(val) {
 
     return true;
 }
+

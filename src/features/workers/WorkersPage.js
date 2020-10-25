@@ -59,7 +59,7 @@ export default function WorkersPage( {firstItems, showDelete, filtersActive = tr
         const displayWorkers = workers.length < firstItemsCount ? workers : workers.slice(0,firstItemsCount);
         return (
             <>
-                <h2>Cele mai recente anunturi</h2>  
+                <h3>Cele mai recente anunturi</h3>  
                 <WorkersList workers={displayWorkers} dismissModal={true}></WorkersList>
             </>
         );
@@ -85,10 +85,12 @@ export default function WorkersPage( {firstItems, showDelete, filtersActive = tr
         if (filtersActive){
             return (
                 <>
-                   <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
-                   <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
-                   <button className="btn btn-primary" onClick={resetFilter}>Resetare filtre</button>
-                   <WorkersList workers={workers} dismissModal={false} showDelete={showDelete}></WorkersList>
+                <div className="filtre">
+                    <DropdownFilter dropdownList={[...new Set(dropDownData[0])]} dropDownTitle={"Filtru localitate"} parentCallback={selection => getFilterLocalization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                    <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
+                </div>
+                    <button className="btn btn-primary reset-btn" onClick={resetFilter}>Resetare filtre</button>
+                    <WorkersList workers={workers} dismissModal={false} showDelete={showDelete}></WorkersList>
                 </>
             );
         } else {

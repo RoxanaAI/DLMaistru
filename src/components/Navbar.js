@@ -7,29 +7,36 @@ import "firebase/auth";
 import { AuthContext } from '../features/auth/AuthContext';
 
 
+
 export default function Navbar() {
-  const { isAuthenticated, user } = useContext(AuthContext);
+    const { isAuthenticated, user } = useContext(AuthContext);
 
-  async function handleLogout(e) {
-    e.preventDefault();
+    async function handleLogout(e) {
+        e.preventDefault();
 
-    try {
-        await firebase.auth().signOut();
-    } catch(e) {
-        console.warn(e);
-    } 
+        try {
+            await firebase.auth().signOut();
+        } catch(e) {
+            console.warn(e);
+        } 
 }
 
+
+
     return (
-      <nav className="navbar navbar-light navbar-expand ">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <img src={logo} alt="logo-mistru" className="logo"></img>
             <Link className="navbar-brand" to="/">DL. Maistru</Link>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div className="collapse navbar-collapse">
-                <ul className="navbar-nav mr-auto">
+                <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li className="nav-item">
-                        <SrNavLink className="nav-link" to="/workers">Anunturi</SrNavLink>
+                        <SrNavLink className="nav-link active" to="/workers">Anunturi</SrNavLink>
                     </li>
-               
+                
                     <li className="nav-item">
                     { isAuthenticated ?
                         <SrNavLink className="nav-link" to="/userworkers">Anunturile mele</SrNavLink> : null
@@ -41,7 +48,6 @@ export default function Navbar() {
                         <SrNavLink className="nav-link" to="/add">Adaugare anunt</SrNavLink> : null
                     }
                     </li>
-                              
                 </ul>
                 <ul className="navbar-nav">
                     {!isAuthenticated ? (
@@ -70,12 +76,12 @@ export default function Navbar() {
 }
 
 function SrNavLink({ children, ...rest}) {
-  const location = useLocation();
+    const location = useLocation();
 
-  return (
-      <NavLink {...rest}>
-          { children }
-          { location.pathname === rest.to && <span className="sr-only">(current)</span> }
-      </NavLink>
-  );
+    return (
+        <NavLink {...rest}>
+            { children }
+            { location.pathname === rest.to && <span className="sr-only">(current)</span> }
+        </NavLink>
+    );
 }

@@ -44,24 +44,27 @@ export default function Worker({ worker, dismissModal, showDelete = false }) {
                     </div>
                 </div>
                 { dismissModal ?
-                    null : <button className="btn btn-primary" onClick={showDetails}>Details</button> 
+                    null : <button className="btn btn-primary worker-btn" onClick={showDetails}>Details</button> 
                 }
+                {/* { showEdit ?
+                    <button className="btn btn-primary worker-btn" onClick={handleEdit}>Edit</button> : null
+                } */}
                 { showDelete ?
-                    <button className="btn btn-primary" onClick={handleDelete}>Delete</button> : null
+                    <button className="btn btn-primary worker-btn" onClick={handleDelete}>Delete</button> : null
                 }
 
                 <Modal {...modalProps} title={ worker.name } >
-                    <div className="form-group row">
+                    <div className="worker-details">
                         <label className=""> Specializare: </label> {worker.specialization}
                     </div>
-                    < div className="form-group row">
+                    < div className="worker-details">
                         <label className=""> Localitate: </label> {worker.location}
                     </div>
-                    < div className="form-group row">
+                    < div className="worker-details">
                         <label className=""> Telefon: </label>  {worker.phoneNumber}
                     </div>
-                    <div className="form-group row">
-                        <label className=""> Descriere: </label> { worker.description }
+                    <div className="worker-details">
+                        <label className=""> Descriere: </label> { worker.description } 
                     </div>
                 </Modal>
             </React.Fragment>
