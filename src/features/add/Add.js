@@ -40,12 +40,6 @@ export default function Add() {
     // function goTo() {
     //      return <Redirect to='/' />
     // }
-    // TODO redirect
-    // TODO the second time the detials are not appearing
-    // TODO align better the form, the design for maistri and adaugare maistru
-    // TODO need to clear the database because now we have workers with the same ID
-
-    
 
     async function handleSubmit(e) {
         e.preventDefault();
