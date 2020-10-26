@@ -52,6 +52,8 @@ html{
   gap: 10px;
 }
 
+
+
 .form-group:last-of-type{
   grid-column: span 2;
 }
@@ -73,12 +75,13 @@ html{
 }
 
 .card{
-  height: 100%;
+  min-height: 100%;
 }
 
 .card-header{
-  height:40%;
+  height:30%;
   display: table;
+  margin-bottom: 20px;
 }
 
 .card-header>h2{
@@ -86,14 +89,19 @@ html{
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  
 }
 
+
 .card-btn{
-  padding: 0px 20px;
+  padding: 10px 20px 0px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  column-gap: 20px;
+}
+
+.worker-btn:first-of-type{
+  grid-column: span 2;
+  margin-bottom: 10px;
 }
 
 .filtre{
