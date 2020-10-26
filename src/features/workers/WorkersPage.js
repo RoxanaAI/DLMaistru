@@ -59,7 +59,7 @@ export default function WorkersPage( {firstItems, showDelete, showEdit, filtersA
         const displayWorkers = workers.length < firstItemsCount ? workers : workers.slice(0,firstItemsCount);
         return (
             <>
-                <h3>Cele mai recente anunturi</h3>  
+                <h3 className="stitlu">Cele mai recente anunturi</h3>  
                 <WorkersList workers={displayWorkers} dismissModal={true}></WorkersList>
             </>
         );

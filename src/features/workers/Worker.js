@@ -61,16 +61,17 @@ export default function Worker({ worker, dismissModal, showDelete = false, showE
                         <label className=""> Localitate: </label> { worker.location }
                     </div>
                 </div>
-                { dismissModal ?
-                    null : <button className="btn btn-primary worker-btn" onClick={showDetails}>Detalii</button> 
-                }
-                { showEdit ?
-                    <button className="btn btn-primary worker-btn" onClick={handleEdit}>Editare</button> : null
-                } 
-                { showDelete ?
-                    <button className="btn btn-primary worker-btn" onClick={handleDelete}>Stergere</button> : null
-                }
-
+                <div className="card-btn">
+                    { dismissModal ?
+                        null : <button className="btn btn-primary worker-btn" onClick={showDetails}>Detalii</button> 
+                    }
+                    { showEdit ?
+                        <button className="btn btn-primary worker-btn" onClick={handleEdit}>Editare</button> : null
+                    } 
+                    { showDelete ?
+                        <button className="btn btn-primary worker-btn" onClick={handleDelete}>Stergere</button> : null
+                    }
+                </div>
                 <Modal {...modalProps} title={ worker.name } >
                     <div className="worker-details">
                         <label className=""> Specializare: </label> {worker.specialization}
