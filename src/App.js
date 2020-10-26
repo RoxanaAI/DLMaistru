@@ -11,6 +11,7 @@ import  WorkersPage  from './features/workers/WorkersPage';
 import { AuthContextProvider } from './features/auth/AuthContext';
 import UserWorkers from './features/workers/UserWorkers';
 import Add from './features/add/Add';
+import Edit from './features/edit/Edit';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Switch>
                 <Route exact path="/workers" component={WorkersPage} />
                 <Route exact path="/add" component={Add} />
+                <Route exact path="/edit/:id" component={Edit} />
                 <Route exact path="/userworkers" component={UserWorkers} />
                 <Route exact path="/login" component={LoginRegister} />
                 <Route exact path="/register" component={LoginRegister} />

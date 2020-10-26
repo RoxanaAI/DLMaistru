@@ -4,7 +4,7 @@ import DropdownFilter  from '../filters/DropdownFilter';
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 
-export default function WorkersPage( {firstItems, showDelete, filtersActive = true, user = null} ) {
+export default function WorkersPage( {firstItems, showDelete, showEdit, filtersActive = true, user = null} ) {
    const [workers, setItem] = useState([]);
    const [primaryExists, setPrimaryExists] = useState(true);
    const [, setLocalization] = useState('');
@@ -90,13 +90,13 @@ export default function WorkersPage( {firstItems, showDelete, filtersActive = tr
                     <DropdownFilter dropdownList={[...new Set(dropDownData[1])]} dropDownTitle={"Filtru specializare"} parentCallback={selection => getFilterSpecialization(selection)} clearSelection={primaryExists}></DropdownFilter>
                 </div>
                     <button className="btn btn-primary reset-btn" onClick={resetFilter}>Resetare filtre</button>
-                    <WorkersList workers={workers} dismissModal={false} showDelete={showDelete}></WorkersList>
+                    <WorkersList workers={workers} dismissModal={false} showDelete={showDelete} showEdit ={showEdit}></WorkersList>
                 </>
             );
         } else {
             return (
                 <>
-                   <WorkersList workers={workers} dismissModal={false} showDelete={showDelete}></WorkersList>
+                   <WorkersList workers={workers} dismissModal={false} showDelete={showDelete} showEdit ={showEdit}></WorkersList>
                 </>
             );
         }
