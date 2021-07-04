@@ -26,7 +26,7 @@ export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <img src={logo} alt="logo-mistru" className="logo"></img>
-            <Link className="navbar-brand" to="/">DL. Maistru</Link>
+            <Link className="navbar-brand" to="/">MeșteriPricepuți</Link>
             <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
